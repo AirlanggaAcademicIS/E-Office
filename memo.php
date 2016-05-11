@@ -149,7 +149,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Data Memo <small>inputkan keterangan memo anda</small></h2>
+                  <h2>Lembar Disposisi Fakultas Sains dan Teknologi <small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -219,66 +219,43 @@
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Diteruskan kepada</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div id="gender" class="btn-group" data-toggle="buttons">
+                        
                           <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="male" data-parsley-multiple="gender" data-parsley-id="7718"> &nbsp; Wadek 1 &nbsp;
+                            <input type="checkbox" name="vehicle" value="WADEK 1"> WADEK 1&nbsp;
                           </label
                             
-                        </div>
+                        
                       </div>
                             
-                            <div id="gender" class="btn-group" data-toggle="buttons">
+                        
                           <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="male" data-parsley-multiple="gender" data-parsley-id="7718"> &nbsp; Wadek 2 &nbsp;
+                            <input type="checkbox" name="vehicle" value="WADEK 1"> WADEK 2&nbsp;
                           </label
                             
-                        </div>
+                       
                       </div>
                                 
-                                <div id="gender" class="btn-group" data-toggle="buttons">
+                                
                           <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="male" data-parsley-multiple="gender" data-parsley-id="7718"> &nbsp; Wadek 3 &nbsp;
+                            <input type="checkbox" name="vehicle" value="WADEK 1"> WADEK 3&nbsp;
                           </label
                             
-                        </div>
+                        
                       </div>
-                                </div></div>
+                              </div></div>
                             
                              <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Sifat Pengelolaan</label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div id="gender" class="btn-group" data-toggle="buttons">
-                          <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="male" data-parsley-multiple="gender" data-parsley-id="7718"> &nbsp; Penting &nbsp;
-                          </label
-                            
-                        </div>
-                      </div>
-                            
-                            <div id="gender" class="btn-group" data-toggle="buttons">
-                          <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="male" data-parsley-multiple="gender" data-parsley-id="7718"> &nbsp; Rahasia &nbsp;
-                          </label
-                            
-                        </div>
-                      </div>
-                                
-                                <div id="gender" class="btn-group" data-toggle="buttons">
-                          <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="male" data-parsley-multiple="gender" data-parsley-id="7718"> &nbsp; Segera &nbsp;
-                          </label
-                            
-                        </div>
-                      </div>
-                                    
-                                    <div id="gender" class="btn-group" data-toggle="buttons">
-                          <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="male" data-parsley-multiple="gender" data-parsley-id="7718"> &nbsp; Biasa &nbsp;
-                          </label
-                            
-                        </div>
-                      </div>
-                                </div></div>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Sifat Pengelolaan
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12 ">
+                        <select class="form-control">
+                          <option>Penting</option>
+                          <option>Rahasia</option>
+                          <option>Segera</option>
+                          <option>Biasa</option>
+                        </select>  
+                          
+                              </div></div>
                             
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Isi Disposisi 
