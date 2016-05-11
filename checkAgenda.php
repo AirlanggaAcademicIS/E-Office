@@ -143,12 +143,9 @@ include ("koneksi.php");
 			<div class="right_col" role="main">
 
 				<div class="row">
+                    <div class="center">AGENDA</div>
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="dashboard_graph">
-
-							<div class="row x_title">
-								<div class="col-md-12">
-									<h3>E-Office! <small>Check Agenda</small></h3>
 								
                 <div class="row">
                     <div class="col-md-12">
@@ -164,13 +161,18 @@ include ("koneksi.php");
 	
 		$query = mysql_query ("select id_agenda,Nama,Waktu from event");
 		while ($data =mysql_fetch_array ($query)){
+		
 		?>
 		<tr>
-			<td><?php echo $data['id_agenda'] ?></td>
-			<td><?php echo $data['Nama'] ?></td>
-			<td><?php echo $data['Waktu'] ?></td>
+			<td><?php 
+				echo "<h5>"."<a href=\"View.php\">".$data['id_agenda']."</a></h1>"; ?></td>
+			<td><?php 
+				echo "<h5>"."<a href=\"View.php\">".$data['Nama']."</a></h1>"; ?></td>
+			<td><?php 
+				echo "<h5>"."<a href=\"View.php\">".$data['Waktu']."</a></h1>"; ?></td>
 			
 		</tr>
+		
 <?php
 
 }
