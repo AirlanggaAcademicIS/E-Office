@@ -132,9 +132,135 @@
 
 
 			<!-- page content -->
-			<div class="right_col" role="main">
+			 <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+            
+			<div class="right_col container-fluid" role="main">
 
-				<img src="images/sedangDibangun.png">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="dashboard_graph">
+
+							<div class="row x_title">
+								<div class="col-md-6">
+									<h3>E-Office! <small>Online Mail</small></h3>
+								</div>
+								<div class="col-md-6">
+
+								</div>
+							</div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Permintaan Surat <small>Inputkan permintaan surat Anda</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <br>
+                    
+                    
+          
+                  
+                  <form data-toggle="validator" role="form" method="post" id="demo-form2" class="form-horizontal form-label-left"  >
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Data Permintaan <span class="required"></span>
+                      </label>
+                      
+                    </div>
+                    <div class="form-group has-feedback">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="judul">Judul 
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="namaeven" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Isi data judul" >
+                      
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        
+                        <div class="help-block with-errors" role="alert">
+                        </div>
+                      </div>
+                    </div> <!-- Judul -->
+                      
+                      
+                    <div class="form-group row has-feedback">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tanggal">tanggal 
+                      </label>
+                        
+                    <div class="form-group has-feedback col-sm-3">  
+                        <input type="date" id="waktu" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                          <div class="help-block with-errors"></div>
+                    </div>
+                       
+                    <div class="form-group has-feedback col-sm-3">
+                        <input type="time" id="first-name" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                      
+                        
+                    </div> <!-- Waktu Even --> 
+                      
+          
+                            
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan 
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12 ">
+                        <textarea class="form-control" rows="3" placeholder="Isi Keterangan Even"></textarea>       </div>
+                    </div><!--keterangan even-->
+                                
+                       <div class="form-group row has-feedback">
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Select File</label>
+ <div class="col-md-6 col-sm-6 col-xs-12 ">
+ <input id="input-1" type="file" class="file">
+                                </div> </div>
+                                
+                                
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        
+                        <button type="submit" class="btn btn-success" >Send</button>
+                      </div>
+                    </div>
+
+                  </form>
+                  
+           
+                </div>
+              </div>
+            </div>
+
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								...
+							</div>
+
+							<div class="clearfix"></div>
+						</div>
+					</div>
+
+				</div>
                 
 				<br />
 
