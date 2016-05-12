@@ -36,6 +36,7 @@
       <p>&nbsp;</p>
     </div></td>
   </tr>
+  
   <?php
 session_start();
  
@@ -46,15 +47,25 @@ include ("koneksi.php");
 $Username=$_GET['Username'];
 $Password=$_GET['Password'];
 
-$query=mysql_query("SELECT * FROM `signup` WHERE Username ='$Username' and Password='$Password'"); 
-$xxx=mysql_num_rows($query);
-if($xxx==TRUE){
-$_SESSION['Username']=$Username;
-header("location:index.php");
-}else{
-echo"gagal login";
+$qry="SELECT Masuk FROM karyawan WHERE Username ='$Username'"; 
+$result=mysql_query($qry);
+
+$count=mysql_num_rows($result);
+
+if($count==0){
+	die("Pasword was probably incorect");
+	}
+else if{$count==1){
+$_SESSION['login']=$login;
+header("location:index.php";
 }
+else {
+	echo "Wrong Username or Password";
+	}
+	}
+	mysql_close($bdd);
 ?>
+
 </table>
 
 
