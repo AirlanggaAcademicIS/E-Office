@@ -25,6 +25,7 @@
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/nprogress.js"></script>
+    <script src="js/validator.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="../assets/js/ie8-responsive-file-warning.js"></script>
@@ -132,10 +133,135 @@
 
 
 			<!-- page content -->
-			<div class="right_col" role="main">
+			<div class="right_col container-fluid" role="main">
 
-				<img src="images/sedangDibangun.png">
-                
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="dashboard_graph">
+
+							<div class="row x_title">
+								<div class="col-md-6">
+									<h3>E-Office! <small>Online Mail</small></h3>
+								</div>
+								<div class="col-md-6">
+
+								</div>
+							</div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Data Agenda <small>Inputkan keterangan Agenda Anda</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <br>
+                    
+                    
+          
+                  
+                  <form data-toggle="validator" role="form" method="post" id="demo-form2" class="form-horizontal form-label-left"  >
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Identitas Agenda <span class="required"></span>
+                      </label>
+                      
+                    </div>
+                    <div class="form-group has-feedback">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="namaeven" name="Nama">Nama Agenda 
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="namaeven" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Isi data Nama Even" >
+                      
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        
+                        <div class="help-block with-errors" role="alert">
+                        </div>
+                      </div>
+                    </div> <!-- Nama Even -->
+                      
+                    <div class="form-group has-feedback">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kategori" name="Kategori">Kategori 
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="kategori" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Kategori even harus diisi"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                      
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        
+
+                          
+                        <div class="help-block with-errors"></div>
+                          </div>
+                    </div> <!-- Kategori Even -->  
+                      
+                     <div class="form-group has-feedback">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempat" name="Lokasi">Tempat 
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="tempat" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Keterangan tempat harus diisi"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                      
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        
+                        <div class="help-block with-errors"></div>     
+                        </div>
+                    </div> <!-- Lokasi Even --> 
+                      
+                    <div class="form-group row has-feedback">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="waktu" name="Waktu">Waktu 
+                      </label>
+                        
+                    <div class="form-group has-feedback col-sm-3">  
+                        <input type="date" id="waktu" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu" for="tanggal"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                          <div class="help-block with-errors"></div>
+                    </div>
+                       
+                    <div class="form-group has-feedback col-sm-3">
+                        <input type="time" id="first-name" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                      
+                        
+                    </div> <!-- Waktu Even --> 
+                      
+          
+                            
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" name="Keterangan">Keterangan 
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12 ">
+                        <textarea class="form-control" rows="3" placeholder="Isi Keterangan Even" for="keterangan"></textarea>       </div>
+                    </div><!--keterangan even-->
+                                
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        
+                        <button type="submit" class="btn btn-success" >Simpan</button>
+                      </div>
+                    </div>
+
+                  </form>
+
+                  
+           
+                </div>
+              </div>
+            </div>
+
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								...
+							</div>
+
+							<div class="clearfix"></div>
+						</div>
+					</div>
+
+				</div>
 				<br />
 
 				<!-- footer content -->
@@ -415,3 +541,13 @@
 </body>
 
 </html>
+
+<?php 
+include 'koneksi.php'; 
+$Nama=$_POST['Nama']; 
+$Kategori=$_POST['Kategori']; 
+$Tempat=$_POST['Lokasi']; 
+$Waktu=$_POST['Waktu']; 
+$Keterangan=$_POST['Keterangan']; 
+$query=mysql_query("insert into event (Nama,Kategori,Lokasi,Waktu,Keterangan) value ('$namaeven','$kategori','$tempat','$tanggal','$keterangan')");  
+?>
