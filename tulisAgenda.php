@@ -170,11 +170,17 @@
                       </label>
                       
                     </div>
+                      
+                    
+                      <!--id agenda-->
+                      
+                      
+                      
                     <div class="form-group has-feedback">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="namaeven" name="Nama">Nama Agenda 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="namaeven" >Nama Agenda 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="namaeven" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Isi data Nama Even" >
+                        <input type="text" id="namaeven" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Isi data Nama Even" name="Nama">
                       
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         
@@ -184,10 +190,10 @@
                     </div> <!-- Nama Even -->
                       
                     <div class="form-group has-feedback">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kategori" name="Kategori">Kategori 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kategori" >Kategori 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="kategori" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Kategori even harus diisi"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                        <input type="text" id="kategori" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Kategori even harus diisi" name="Kategori"><ul class="parsley-errors-list filled" id="parsley-id-1360" name="Kategori"></ul>
                       
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         
@@ -198,10 +204,10 @@
                     </div> <!-- Kategori Even -->  
                       
                      <div class="form-group has-feedback">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempat" name="Lokasi">Tempat 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempat" >Tempat 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="tempat" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Keterangan tempat harus diisi"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                        <input type="text" id="tempat" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Keterangan tempat harus diisi" name="Lokasi"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
                       
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         
@@ -210,17 +216,17 @@
                     </div> <!-- Lokasi Even --> 
                       
                     <div class="form-group row has-feedback">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="waktu" name="Waktu">Waktu 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="waktu" >Waktu 
                       </label>
                         
                     <div class="form-group has-feedback col-sm-3">  
-                        <input type="date" id="waktu" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu" for="tanggal"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                        <input type="date" name="Tanggal" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu" for="tanggal"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                           <div class="help-block with-errors"></div>
                     </div>
                        
                     <div class="form-group has-feedback col-sm-3">
-                        <input type="time" id="first-name" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                        <input type="time" name="Pukul" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
                               <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div class="help-block with-errors"></div>
                     </div>
@@ -231,23 +237,39 @@
           
                             
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" name="Keterangan">Keterangan 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" >Keterangan 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12 ">
-                        <textarea class="form-control" rows="3" placeholder="Isi Keterangan Even" for="keterangan"></textarea>       </div>
+                        <textarea class="form-control" rows="3" placeholder="Isi Keterangan Even" for="keterangan" name="Keterangan"></textarea>       </div>
                     </div><!--keterangan even-->
                                 
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         
-                        <button type="submit" class="btn btn-success" >Simpan</button>
+                        <input type="submit" class='btn btn-success' name="submit" value="Simpan">
                       </div>
                     </div>
 
                   </form>
 
-                  
+<?php 
+if (isset($_POST['submit'])){
+include ('koneksi.php'); 
+    echo 'db sampe sini';
+//$ = int (java)
+$Nama=$_POST['Nama']; 
+$Kategori=$_POST['Kategori']; 
+$Lokasi=$_POST['Lokasi']; 
+$Tanggal=$_POST['Tanggal'];
+$Pukul=$_POST['Pukul'];
+$Keterangan=$_POST['Keterangan'];
+    
+$input    ="INSERT INTO event (Nama, Kategori, Lokasi, Tanggal, Pukul, Keterangan)
+            VALUES ('$Nama','$Kategori','$Lokasi','$Tanggal','$Pukul','$Keterangan')";
+    mysql_query($input);}
+?>
+                    
            
                 </div>
               </div>
@@ -542,12 +564,3 @@
 
 </html>
 
-<?php 
-include 'koneksi.php'; 
-$Nama=$_POST['Nama']; 
-$Kategori=$_POST['Kategori']; 
-$Tempat=$_POST['Lokasi']; 
-$Waktu=$_POST['Waktu']; 
-$Keterangan=$_POST['Keterangan']; 
-$query=mysql_query("insert into event (Nama,Kategori,Lokasi,Waktu,Keterangan) value ('$namaeven','$kategori','$tempat','$tanggal','$keterangan')");  
-?>
