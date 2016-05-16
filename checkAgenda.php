@@ -140,43 +140,45 @@ include ("koneksi.php");
 
 
 			<!-- page content -->
+			
 			<div class="right_col" role="main">
 
 				<div class="row">
                     <div class="center">AGENDA</div>
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="dashboard_graph">
-								
+					 <h3>E-Office! <small> List Agenda</small>			
                 <div class="row">
                     <div class="col-md-12">
  
+
 <table width = "80%" border = "1" cellpadding="0" cellspacing="center" style="margin:100px auto">
 	<tr>
-		<td width="5%">No</td>
-		<td width="10%">Nama</td>
-		<td width="20%">Waktu</td>
+		
+							<th>Nomor</th>
+                            <th>Nama Agenda</th>
+                            <th>Waktu</th>
+                            <th>Detail</th>
+                            
 		
 	</tr>
 	<?php
 	
-		$query = mysql_query ("select id_agenda,Nama,Waktu from event");
-		while ($data =mysql_fetch_array ($query)){
-		
-		?>
-		<tr>
-			<td><?php 
-				echo "<h5>"."<a href=\"View.php\">".$data['id_agenda']."</a></h1>"; ?></td>
-			<td><?php 
-				echo "<h5>"."<a href=\"View.php\">".$data['Nama']."</a></h1>"; ?></td>
-			<td><?php 
-				echo "<h5>"."<a href=\"View.php\">".$data['Waktu']."</a></h1>"; ?></td>
-			
-		</tr>
-		
-<?php
+		$query = mysql_query ("select id_agenda,Nama,Tanggal from event");
+		$id=0;  
+	while ($data = mysql_fetch_array ($query)){  
+ 	$id++; 
+ 	echo "      
+        <tr>  
+        <td>".$id."</td>
+		<td>".$data[1]."</td>  
+        <td>".$data[2]."</td>     
+		<td><a href=\"View.php?id=".$id."\">"."Detail</a> "."
+        </tr>   
+        ";            
+		} 
+	?>
 
-}
-?>
                </div></div>
 							</div>
 

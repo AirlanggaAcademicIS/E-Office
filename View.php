@@ -5,6 +5,7 @@
 <title>AGENDA</title>
 <?php
 include ("koneksi.php");
+
 ?>
 
 <head>
@@ -79,7 +80,7 @@ include ("koneksi.php");
 							<h3>General</h3>
 							<ul class="nav side-menu">
 								<li><a href="index.php"><i class="fa fa-home"></i> Home </a>
-									</li>
+							  </li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
 										<li><a href="permintaanSurat.php">Permintaan Surat</a>
@@ -144,45 +145,50 @@ include ("koneksi.php");
 			<div class="right_col" role="main">
 
 				<div class="row">
+                    <div class="center"> DETAIL AGENDA</div>
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="dashboard_graph">
+				<h3>E-Office! <small>Detail Agenda</small>				
+                <div class="row">
+                    <div class="col-md-12"></div><h3>
 
-							<div class="row x_title">
-								<div class="col-md-12">
-									<h3>E-Office! <small>Check Agenda</small></h3>
 								
                 <div class="row">
                     <div class="col-md-12">
 <table width = "80%" border = "1" cellpadding="0" cellspacing="center" style="margin:100px auto">
-<tr>
-		<td width="5%">No</td>
-		<td width="10%">Nama</td>
-		<td width="20%">Kategori</td>
-		<td width="20%">Lokasi</td>
-		<td width="20%">Waktu</td>
-		<td width="20%">Keterangan</td>
+	<tr>
+		
+							<th>Nomor</th>
+                            <th>Nama Agenda</th>
+							<th>Kategori</th>
+							<th>Lokasi</th>
+							<th>Tanggal</th>
+                            <th>Waktu</th>
+                            <th>Keterangan</th>
+                            
 		
 	</tr>
+
+	 <?php
 	
-	<?php
-	echo "A G E N D A";
-		
-		$query = mysql_query ("select * from event where Nama='Seminar Sertifikasi Oracle'");
-		while ($data =mysql_fetch_array ($query)){
-		?>
-		<tr>
-			<td><?php echo $data['id_agenda'] ?></td>
-			<td><?php echo $data['Nama'] ?></td>
-			<td><?php echo $data['Kategori'] ?></td>
-			<td><?php echo $data['Lokasi'] ?></td>
-			<td><?php echo $data['Waktu'] ?></td>
-			<td><?php echo $data['Keterangan'] ?></td>
-		</tr>
-<?php
-
-}
-?>
-
+		$query ="Select * from event where id_agenda=".$_GET['id'];
+		$hasil=mysql_query ($query);
+	while ($data = mysql_fetch_array ($hasil)){  
+ 	
+ 	echo "      
+        <tr>  
+        
+		<td>".$data[0]."</td>  
+        <td>".$data[1]."</td> 
+		<td>".$data[2]."</td> 
+		<td>".$data[3]."</td> 
+		<td>".$data[4]."</td>
+		<td>".$data[5]."</td>
+		<td>".$data[6]."</td>     
+        </tr>   
+        ";            
+		} 
+	?> 
 
 
                </div></div>
