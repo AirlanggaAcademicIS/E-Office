@@ -66,29 +66,31 @@
 					<br />
 
 					<!-- sidebar menu -->
-				<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="index.html"><i class="fa fa-home"></i> Home </a>
+								<li><a href="index.php"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="permintaanSurat.html">Permintaan Surat</a>
+										<li><a href="permintaanSurat.php">Permintaan Surat</a>
 										</li>
-										<li><a href="memo.html">Buat Memo</a>
+										<li><a href="memo.php">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakSurat.html">Kotak Surat</a>
+                                        <li><a href="kotakMasuk.php">Kotak Masuk  <span class="badge">0</span></a>
+										</li>
+                                        <li><a href="kotakKeluar.php">Kotak Keluar  <span class="badge">0</span></a>
 										</li>
                                         
 									</ul>
 								</li>
                                 <li><a><i class="fa fa-edit"></i> Agenda <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="checkAgenda.html">Check Agenda</a>
+										<li><a href="checkAgenda.php">Check Agenda</a>
 										</li>
-										<li><a href="tulisAgenda.html">Tulus Agenda</a>
+										<li><a href="tulisAgenda.php">Tulis Acara</a>
 										</li>
 									</ul>
 								</li>
@@ -225,7 +227,7 @@
                           </label
                             
                         
-                      </div>
+                      ></div>
                             
                         
                           <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
@@ -233,7 +235,7 @@
                           </label
                             
                        
-                      </div>
+                      ></div>
                                 
                                 
                           <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
@@ -241,7 +243,7 @@
                           </label
                             
                         
-                      </div>
+                      ></div>
                               </div></div>
                             
                              <div class="form-group">

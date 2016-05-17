@@ -66,7 +66,7 @@
 					<br />
 
 					<!-- sidebar menu -->
-					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+						<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
 						<div class="menu_section">
 							<h3>General</h3>
@@ -79,7 +79,9 @@
 										</li>
 										<li><a href="memo.php">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakSurat.php">Kotak Surat</a>
+                                        <li><a href="kotakMasuk.php">Kotak Masuk  <span class="badge">0</span></a>
+										</li>
+                                        <li><a href="kotakKeluar.php">Kotak Keluar  <span class="badge">0</span></a>
 										</li>
                                         
 									</ul>
