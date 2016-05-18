@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>E-Office | Permintaan Surat</title>
+<?php
+include ("koneksi.php");
+?>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,6 +30,7 @@
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/nprogress.js"></script>
+    <script src="js/validator.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="../assets/js/ie8-responsive-file-warning.js"></script>
