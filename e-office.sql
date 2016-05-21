@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: May 16, 2016 at 11:13 AM
--- Server version: 5.6.20
--- PHP Version: 5.5.15
+-- Host: localhost
+-- Generation Time: May 21, 2016 at 06:20 AM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.6.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `e-office`
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `berita`
 --
 
-CREATE TABLE IF NOT EXISTS `berita` (
+CREATE TABLE `berita` (
   `Nomor_Berita` varchar(50) NOT NULL,
   `Judul_Berita` varchar(50) NOT NULL,
   `Isi_Berita` varchar(50) NOT NULL,
@@ -37,33 +37,18 @@ CREATE TABLE IF NOT EXISTS `berita` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `e-letter`
---
-
-CREATE TABLE IF NOT EXISTS `e-letter` (
-  `No.Surat` varchar(50) NOT NULL,
-  `Judul_Surat` varchar(50) NOT NULL,
-  `Lampiran` varchar(50) NOT NULL,
-  `Acc.Kaprodi` varchar(50) NOT NULL,
-  `Acc.Kadep` varchar(50) NOT NULL,
-  `Gambar` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `event`
 --
 
-CREATE TABLE IF NOT EXISTS `event` (
-`id_agenda` int(10) NOT NULL,
+CREATE TABLE `event` (
+  `id_agenda` int(10) NOT NULL,
   `Nama` varchar(45) DEFAULT NULL,
   `Kategori` varchar(45) DEFAULT NULL,
   `Lokasi` varchar(45) DEFAULT NULL,
   `Tanggal` date DEFAULT NULL,
   `Pukul` time DEFAULT NULL,
   `Keterangan` text
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `event`
@@ -81,18 +66,55 @@ INSERT INTO `event` (`id_agenda`, `Nama`, `Kategori`, `Lokasi`, `Tanggal`, `Puku
 -- --------------------------------------------------------
 
 --
--- Table structure for table `signup`
+-- Table structure for table `lembar_disposisi`
 --
 
-CREATE TABLE IF NOT EXISTS `signup` (
-  `Username` varchar(50) NOT NULL,
+CREATE TABLE `lembar_disposisi` (
+  `No_Agenda` int(11) NOT NULL,
+  `Tanggal_Surat` date NOT NULL,
+  `Kode` varchar(12) NOT NULL,
+  `Perihal` varchar(30) NOT NULL,
+  `Sifat_Pengelolaan` int(11) NOT NULL,
+  `Isi_Disposisi` varchar(1000) NOT NULL,
+  `Keterangan` varchar(1000) NOT NULL,
+  `No_Pesan` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pegawai`
+--
+
+CREATE TABLE `pegawai` (
+  `Nip` int(50) NOT NULL,
   `Password` varchar(50) NOT NULL,
-  `Nik` varchar(50) NOT NULL,
-  `Nama_Karyawan` varchar(50) NOT NULL,
+  `Nama_Pegawai` varchar(50) NOT NULL,
   `Alamat` varchar(50) NOT NULL,
-  `Telp_Karyawan` int(11) NOT NULL,
-  `Email_Karyawan` varchar(50) NOT NULL,
-  `Jabatan` int(11) NOT NULL
+  `Telp_Pegawai` int(11) NOT NULL,
+  `Email_Pegawai` varchar(50) NOT NULL,
+  `Jabatan` varchar(30) NOT NULL,
+  `Gelar` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pesan`
+--
+
+CREATE TABLE `pesan` (
+  `No_Pesan` int(15) NOT NULL,
+  `Judul_Pesan` varchar(50) NOT NULL,
+  `Tanggal` date NOT NULL,
+  `Waktu` datetime NOT NULL,
+  `Keterangan` varchar(1000) NOT NULL,
+  `File` blob NOT NULL,
+  `Pengirim` varchar(30) NOT NULL,
+  `Penerima` varchar(30) NOT NULL,
+  `Tanggal_kirim` date NOT NULL,
+  `Status_pengirim` int(1) NOT NULL,
+  `Status_penerima` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -103,7 +125,13 @@ CREATE TABLE IF NOT EXISTS `signup` (
 -- Indexes for table `event`
 --
 ALTER TABLE `event`
- ADD PRIMARY KEY (`id_agenda`);
+  ADD PRIMARY KEY (`id_agenda`);
+
+--
+-- Indexes for table `pesan`
+--
+ALTER TABLE `pesan`
+  ADD PRIMARY KEY (`No_Pesan`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -113,7 +141,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-MODIFY `id_agenda` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id_agenda` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
