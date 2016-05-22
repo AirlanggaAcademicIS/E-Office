@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>E.Office | </title>
+     <? include("koneksi.php"); ?>
 
 	<!-- Bootstrap core CSS -->
 
@@ -35,6 +36,16 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+    <?php
+    $Pengguna=$_GET['pengguna'];
+    $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
+    $hasil=mysql_query ($query);
+        if($hasil==false){
+        echo "DB SEDANG EROR";
+        }else{
+        while ($data = mysql_fetch_array ($hasil)){
+        $jumlahKotakMasuk=$data[0];}}
+    ?>
 
 </head>
 
@@ -71,7 +82,7 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="index.php"><i class="fa fa-home"></i> Home </a>
+								<li><a href="index.php?pengguna=<? echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
@@ -79,9 +90,9 @@
 										</li>
 										<li><a href="memo.php">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakMasuk.php">Kotak Masuk  <span class="badge">0</span></a>
+                                        <li><a href="kotakMasuk.php?pengguna=<? echo $Pengguna ?>">Kotak Masuk <span class="badge"><? echo $jumlahKotakMasuk ?></span></a>
 										</li>
-                                        <li><a href="kotakKeluar.php">Kotak Keluar  <span class="badge">0</span></a>
+                                        <li><a href="kotakKeluar.php?pengguna=<? echo $Pengguna ?>">Kotak Keluar</a>
 										</li>
                                         
 									</ul>

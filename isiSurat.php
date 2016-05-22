@@ -85,30 +85,37 @@ $(document).ready(function(){
     */ 
     ?>   <!-- eror-->
     <?php
+    $Pengguna=$_GET['pengguna'];
     $judulPesan=$_GET['judulpesan'];
+    //membedakan penerima dengan pengirim sudah baca atau belum
+    
+    ?>
+    <!-- untuk menghitung kotak masuk yang belum terbaca -->
+    <?
+    $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
+    $hasil=mysql_query ($query);
+        if($hasil==false){
+        echo "DB SEDANG EROR";
+        }else{
+        while ($data = mysql_fetch_array ($hasil)){
+        $jumlahKotakMasuk=$data[0];}}
+       
+    ?> <!-- untuk menghitung kotak masuk yang belum terbaca -->
+    
+    <!--untuk menlist banyak surat -->
+    <?php
+    
         $query="Select * from pesan where Judul_Pesan='".$judulPesan."'"; //Query select seluruhnya dari judul surat
         $hasil=mysql_query ($query);
         if($hasil==false){
         echo "salah";
         }else{
         $countSurat=0;
-        while ($data = mysql_fetch_array ($hasil)){
-        $NoPesan[$countSurat]=$data[0];
-        $JudulPesan[$countSurat]=$data[1];
-        $Tanggal[$countSurat]=$data[2];
-        $Waktu[$countSurat]=$data[3];
-        $Keterangan[$countSurat]=$data[4];
-        $Pengirim[$countSurat]=$data[6];
-        $Penerima[$countSurat]=$data[7];
-        $TanggalKirim[$countSurat]=$data[8];
-        $StatusPengirim[$countSurat]=$data[9];
-        $StatusPenerima[$countSurat]=$data[10];
-        $countSurat++;
-    } 
-    }
-    $i=0;
+       
+    
     
     ?>
+    <!--untuk menlist banyak surat -->
     
 <!--persiapan data PHP-->    
 	<div class="container body">
@@ -141,7 +148,7 @@ $(document).ready(function(){
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="index.php"><i class="fa fa-home"></i> Home </a>
+								<li><a href="index.php?pengguna=<? echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
@@ -149,9 +156,9 @@ $(document).ready(function(){
 										</li>
 										<li><a href="memo.php">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakMasuk.php">Kotak Masuk  <span class="badge">0</span></a>
+                                        <li><a href="kotakMasuk.php?pengguna=<? echo $Pengguna ?>">Kotak Masuk <span class="badge"><? echo $jumlahKotakMasuk ?></span></a>
 										</li>
-                                        <li><a href="kotakKeluar.php">Kotak Keluar  <span class="badge">0</span></a>
+                                        <li><a href="kotakKeluar.php?pengguna=<? echo $Pengguna ?>">Kotak Keluar</a>
 										</li>
                                         
 									</ul>
@@ -210,14 +217,34 @@ $(document).ready(function(){
 
 				<div class="row"><!--badan-->
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                        
+                        <!-- looping listsurat-->
+                        <?php while ($data = mysql_fetch_array ($hasil)){
+        
+                        $NoPesan[$countSurat]=$data[0];
+                        $JudulPesan[$countSurat]=$data[1];
+                        $Tanggal[$countSurat]=$data[2];
+                        $Waktu[$countSurat]=$data[3];
+                        $Keterangan[$countSurat]=$data[4];
+                        $Pengirim[$countSurat]=$data[6];
+                        $Penerima[$countSurat]=$data[7];
+                        $TanggalKirim[$countSurat]=$data[8];
+                        $StatusPengirim[$countSurat]=$data[9];
+                        $StatusPenerima[$countSurat]=$data[10];
+                        if($Pengguna==$Penerima[$countSurat]){
+    $queryStatusPenerima="UPDATE pesan SET Status_penerima = 1 WHERE No_Pesan='".$NoPesan[$countSurat]."'";
+    mysql_query ($queryStatusPenerima);}
+        else{
+    $queryStatusPenerima="UPDATE pesan SET Status_pengirim = 1 WHERE No_Pesan='".$NoPesan[$countSurat]."'";
+    mysql_query ($queryStatusPenerima);
+        }
+                            ?>
 						<div id="listsurat">
                             <div class="dashboard_graph">
                                
                             <div class="x_panel">
                                 <ul class="nav navbar-right panel_toolbox">                   
                                     <li>
-                                        <a class="collapse-link"><? echo"$JudulPesan[$i]"; ?><i class="fa fa-chevron-up"></i></a>                    
+                                        <a class="collapse-link"><? echo"$JudulPesan[$countSurat]"; ?><i class="fa fa-chevron-up"></i></a>                    
                                     </li>                  
                                 </ul>                                
                                 <div class="x_content">
@@ -226,8 +253,8 @@ $(document).ready(function(){
                                             <img src="images/user.png" class="img-rounded" alt="nama pengguna" width=50px height=50px>                                
                                         </div>                                
                                         <div class="col-md-11">                                
-                                            <h4><strong><? echo"$JudulPesan[$i]"; ?> <small> (<? echo"$TanggalKirim[$i]"; ?>)</small></strong></h4>                                
-                                            <h4><strong><? echo"$Pengirim[$i]"; ?></strong></h4>                                
+                                            <h4><strong><? echo"Judul: $JudulPesan[$countSurat]"; ?> <small> (<? echo"$TanggalKirim[$countSurat]"; ?>)</small></strong></h4>                                
+                                            <h4><strong><? echo"Dari: $Pengirim[$countSurat]"; ?></strong></h4>                                
                                         </div>                            
                                     </div>                            
                                     <div class="row">                                
@@ -236,7 +263,7 @@ $(document).ready(function(){
                                                 <!--<div class="well well-sm">-->                                            
                                                     <h4>                                                
                                                         <p>
-                                                            <? echo "$Keterangan[$i]"?>
+                                                            <? echo "$Keterangan[$countSurat]"?>
                                                             <br>
                                                         </p>                                            
                                                     </h4>                                        
@@ -249,20 +276,23 @@ $(document).ready(function(){
                             
 							
 						</div>
-                   <? echo $i; 
-    $i++;
+                   <?  
                     ?>
                             </div>
+                            <?php $countSurat++;}}?> <!--php closing id listsurat-->
                             
                 <!-- JScript looping isi surat-->
                 <script> 
                 var element = document.getElementById("listsurat");
                 //var countSurat = php echo json_encode($i); 
-                for(var i=0;i<1;i++){
+                for(var i=0;i<0;i++){
                 //element.innerHTML = "New Header"+text;
                 //$("#listsurat").append(element.innerHTML);
                 document.write(element.innerHTML+"<br>");
                 }
+                    function reloadFunction(){
+                        location.reload();
+                    }
                 </script>
                 <!-- JScript looping isi surat -->
                             
@@ -280,25 +310,52 @@ $(document).ready(function(){
                                 <!--- button balas collapse-->
                                 <div id="balas" class="panel-collapse collapse">
                                           <div class="x_panel">   
-                                              <form class="form-horizontal" role="form" action="isiSurat.php"><!-- form balas -->
-                                                <h4><strong><? echo"$JudulPesan[0]"; ?><small> (<? echo"  $TanggalKirim[0]"; ?>)</small></strong></h4>                
-                                                  <h4><strong><? echo"$Penerima[0]"; ?></strong></h4>
+                                              <form class="form-horizontal" data-toggle="validator" role="form" method="post"><!-- form balas -->
+                                                <h4><strong><? echo"Judul: $JudulPesan[0]"; ?><small></small></strong></h4>                
+                                                  <? $countSurat--; 
+                                                      $penerimaSuratNomer=$countSurat;//penerimaSuratNomer= array untuk penerima surat bukan dirinya sendiri
+                                                      while($Pengirim[$penerimaSuratNomer]==$Pengguna && $penerimaSuratNomer!=0){$penerimaSuratNomer--;
+                                                     //mencari pengirim balasan
+                                                      }
+                                                     
+                                                    
+                                                    if($Pengirim[$penerimaSuratNomer]==$Pengguna){
+                                                        $PenerimaBalas=$Penerima[$countSurat];
+                                                        //Mengirim pada penerima surat ketika belum ada balasan   
+                                                    }else{
+                                                       $PenerimaBalas=$Pengirim[$penerimaSuratNomer]; 
+                                                    }
+                                                       ?>
+                                                  <h4><strong><? echo"Kepada : $PenerimaBalas"; ?></strong></h4>
                                                   <br>
                                                   <div class="form-group">                                                      
                                                       <div class="col-md-12">
                                                           <label for="comment">PESAN:</label>
-                                                          <textarea class="form-control" id="text_balas" placeholder="Masukan Pesan" row="10"></textarea>
+                                                          <textarea class="form-control" id="text_balas" placeholder="Masukan Pesan" row="10" name="keterangan"></textarea>
                                                       </div>
                                                   </div>
                                                   <div class="form-group">
                                                       <div class="col-md-12">
                                                           <button type="button" class="btn btn-default">Upload File</button>
                                                           <div class="pull-right">
-                                                          <button type="submit" class="btn btn-default">Kirim Pesan</button>
+                                                          <button type="submit" name="submit" class="btn btn-primary">Kirim Pesan</button>
+                                            <?php
+                                              if (isset($_REQUEST['submit'])){
+                                                  $KeteranganBalas=$_POST['keterangan'];
+                                                  $PengirimBalas=$Pengguna;
+                                                  $TanggalBalas=date("Y-m-d");
+                                                  $query ="INSERT INTO pesan (No_Pesan,Judul_Pesan,Tanggal,Waktu,Keterangan,Pengirim,Penerima,Tanggal_kirim,Status_pengirim,Status_penerima) VALUES ('null','$JudulPesan[0]','$Tanggal[0]','$Waktu[0]','$KeteranganBalas','$PengirimBalas','$PenerimaBalas','$TanggalBalas','0','0')";
+                                                  mysql_query ($query);
+                                              }
+                                              
+                                              
+                                              ?>
                                                           </div>
                                                       </div>
                                                   </div>                                                  
                                               </form><!-- form balas -->
+                                              <!-- setelah tombol submit di tekan-->
+                                              
                                         </div>
                                     
                                 </div><!-- button balas -->
