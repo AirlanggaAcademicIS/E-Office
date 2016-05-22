@@ -145,7 +145,7 @@
 
 
 			<!-- page content -->
-			<div class="right_col" role="main">
+			<div class="right_col container-fluid" role="main">
 
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">
@@ -156,12 +156,98 @@
 									<h3>E-Office! <small>Online Mail</small></h3>
 								</div>
 								<div class="col-md-6">
-                                    
 
 								</div>
 							</div>
                             <div class="col-md-12 col-sm-12 col-xs-12">
-              
+              <div class="x_panel">
+                <div class="x_title">
+                <h2><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                  Selamat Datang di Aplikasi E-0ffice</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <br>
+                    
+                    
+                    
+                    <div class="table">
+                    <div class="col-md-4">
+                    <div class="row x_title"> <h1>Berita</h1> </div>
+                        
+                        
+                    </div>
+                    
+                    <div class="col-md-4">
+                    <div class="row x_title"> <h1>Event</h1> </div>
+                        
+                        <div class="table">
+                            <div class="row">
+                            
+                            
+                                
+<?php
+        include ('koneksi.php');
+	   
+		$query = mysql_query ("select * from event");
+		while ($data =mysql_fetch_array ($query) ){
+		?>
+                                
+                                
+<div class="col-sm-12">
+    <h2><?php echo '<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>  '.$data['Nama'] ?></h2>
+    <table class="table table-striped">
+        <tr>
+     <td>
+        <?php echo $data['Lokasi'] ?>
+      </td>
+      <td>
+        <?php echo $data['Tanggal'] ?>
+      </td>
+        <td>
+        <?php echo $data['Pukul'] ?>
+      </td>
+        </tr>
+    </table>
+</div>
+    <!--    
+		<tr>
+            <td class="row row-md-12 ">
+			<tr>
+                
+            
+			<td class="success col col-md-4"></td>
+			<td class="warning col col-md-4"></td>
+            <td class="info col col-md-4"></td>
+            </tr>
+            </td>
+			
+		</tr>
+-->
+<?php
+
+}
+?>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                    <div class="row x_title"> <h1>Notifikasi</h1> </div>
+                    </div>
+                </div>
+                  
+                  
+
+
+                    
+           
+                </div>
+              </div>
             </div>
 
 							<div class="col-md-12 col-sm-12 col-xs-12">
@@ -173,22 +259,6 @@
 					</div>
 
 				</div>
-                
-                <div class="row">
-                    <div class="col-md-4">
-                    <div class="row x_title"> <h1>Berita</h1> </div>
-                        
-                        
-                    </div>
-                    <div class="col-md-4">
-                    <div class="row x_title"> <h1>Event</h1> </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                    <div class="row x_title"> <h1>Notifikasi</h1> </div>
-                    </div>
-                </div>
-                
 				<br />
 
 				<!-- footer content -->
