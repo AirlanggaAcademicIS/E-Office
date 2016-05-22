@@ -22,6 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="css/maps/jquery-jvectormap-2.0.3.css" />
 	<link href="css/icheck/flat/green.css" rel="stylesheet" />
 	<link href="css/floatexamples.css" rel="stylesheet" type="text/css" />
+    
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/nprogress.js"></script>
@@ -35,12 +36,81 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-
+<script>
+$(document).ready(function(){
+    $("#btn_balas").click(function(){
+        $("#btn_balas").remove();
+    });
+});
+</script>
+   
+    
 </head>
 
 
 <body class="nav-md">
-
+ <!--persiapan data PHP-->
+    
+    <?php
+    /*
+    $judulpesan=$_GET['judulpesan'];
+    $query1="Select No_Pesan from pesan where Judul_Pesan='".$judulpesan."'"; //Query select Judul Surat
+    $hasil=mysql_query ($query1);
+    $i=0; //$i untuk menghitung jumlah surat
+    while ($data = mysql_fetch_array ($hasil)){
+        $NoPesan[$i]=$data[0]; //Mendapatkan no pesan dengan judul
+        echo $data[0];
+        $query2="Select * from pesan where No_Pesan='".$NoPesan[$i]."'"; //Query select isi dari judul surat
+        $hasil2=mysql_query ($query2);
+        if($hasil2==false){
+        echo "salah";
+        }else{
+        //$countSurat=0;
+        while ($data2 = mysql_fetch_array ($hasil2)){
+        $NoPesan[$i]=$data2[0];
+        $JudulPesan[$i]=$data2[1];
+        $Tanggal[$i]=$data2[2];
+        $Waktu[$i]=$data2[3];
+        $Keterangan[$i]=$data2[4];
+        $Pengirim[$i]=$data2[6];
+        $Penerima[$i]=$data2[7];
+        $TanggalKirim[$i]=$data2[8];
+        $StatusPengirim[$i]=$data2[9];
+        $StatusPenerima[$i]=$data2[10];
+       // $countSurat++;
+    }
+    }
+        $i++;
+    }
+    */ 
+    ?>   <!-- eror-->
+    <?php
+    $judulPesan=$_GET['judulpesan'];
+        $query="Select * from pesan where Judul_Pesan='".$judulPesan."'"; //Query select seluruhnya dari judul surat
+        $hasil=mysql_query ($query);
+        if($hasil==false){
+        echo "salah";
+        }else{
+        $countSurat=0;
+        while ($data = mysql_fetch_array ($hasil)){
+        $NoPesan[$countSurat]=$data[0];
+        $JudulPesan[$countSurat]=$data[1];
+        $Tanggal[$countSurat]=$data[2];
+        $Waktu[$countSurat]=$data[3];
+        $Keterangan[$countSurat]=$data[4];
+        $Pengirim[$countSurat]=$data[6];
+        $Penerima[$countSurat]=$data[7];
+        $TanggalKirim[$countSurat]=$data[8];
+        $StatusPengirim[$countSurat]=$data[9];
+        $StatusPenerima[$countSurat]=$data[10];
+        $countSurat++;
+    } 
+    }
+    $i=0;
+    
+    ?>
+    
+<!--persiapan data PHP-->    
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -138,15 +208,16 @@
 			<!-- page content -->
 			<div class="right_col" role="main">
 
-				<div class="row">
+				<div class="row"><!--badan-->
                         <div class="col-md-12 col-sm-12 col-xs-12">
+                        
 						<div id="listsurat">
                             <div class="dashboard_graph">
                                
                             <div class="x_panel">
                                 <ul class="nav navbar-right panel_toolbox">                   
                                     <li>
-                                        <a class="collapse-link">JUDUL SURAT<i class="fa fa-chevron-up"></i></a>                    
+                                        <a class="collapse-link"><? echo"$JudulPesan[$i]"; ?><i class="fa fa-chevron-up"></i></a>                    
                                     </li>                  
                                 </ul>                                
                                 <div class="x_content">
@@ -155,8 +226,8 @@
                                             <img src="images/user.png" class="img-rounded" alt="nama pengguna" width=50px height=50px>                                
                                         </div>                                
                                         <div class="col-md-11">                                
-                                            <h4><strong>JUDUL SURAT <small> (tanggal surat)</small></strong></h4>                                
-                                            <h4><strong>DOSEN</strong></h4>                                
+                                            <h4><strong><? echo"$JudulPesan[$i]"; ?> <small> (<? echo"$TanggalKirim[$i]"; ?>)</small></strong></h4>                                
+                                            <h4><strong><? echo"$Pengirim[$i]"; ?></strong></h4>                                
                                         </div>                            
                                     </div>                            
                                     <div class="row">                                
@@ -165,7 +236,7 @@
                                                 <!--<div class="well well-sm">-->                                            
                                                     <h4>                                                
                                                         <p>
-                                                            isi surat
+                                                            <? echo "$Keterangan[$i]"?>
                                                             <br>
                                                         </p>                                            
                                                     </h4>                                        
@@ -178,8 +249,22 @@
                             
 							
 						</div>
-                   
+                   <? echo $i; 
+    $i++;
+                    ?>
                             </div>
+                            
+                <!-- JScript looping isi surat-->
+                <script> 
+                var element = document.getElementById("listsurat");
+                //var countSurat = php echo json_encode($i); 
+                for(var i=0;i<1;i++){
+                //element.innerHTML = "New Header"+text;
+                //$("#listsurat").append(element.innerHTML);
+                document.write(element.innerHTML+"<br>");
+                }
+                </script>
+                <!-- JScript looping isi surat -->
                             
                             <div class="x_panel">
                                 <div class="pull-left">                                
@@ -188,101 +273,59 @@
                                 <div class="pull-right">
                                 <div class="panel-group" id="accordion">
                                 
-                                 
-                                    <h4 class="panel-title">
-                                      <button type="button" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#teruskan" >BALAS</a>
-                                    </h4>
-                                  
-                                  <div id="teruskan" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                          <div class="x_panel">   
-                                              <div class="row">       
-                                                  <div class="col-md-12">              
-                                                      <h4><strong>JUDUL SURAT <small> (tanggal surat)</small></strong></h4>
-                                                      <h4><strong>DOSEN</strong></h4>            
-                                                  </div>          
-                                              </div>     
-                                              <div class="row">
-                                                  <div class="col-md-12">      
-                                                      <blockquote>                   
-                                                          <h4>                     
-                                                              <p>                     
-                                                                  isi surat      
-                                                                  <br>                 
-                                                              </p>                
-                                                          </h4>       
-                                                      </blockquote> 
-                                                  </div>       
-                                              </div>
-                                        </div>
-                                      </div>
-                                  </div>
+                                <button id="btn_balas" type="button" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#balas" >BALAS</button>
                                 
-                            <h4 class="panel-title">
-                              <button type="button" class="btn btn-success" data-toggle="collapse" data-parent="#accordion" href="#balas">TERUSKAN</a>
-                            </h4>
-                          
-                          <div id="balas" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="x_panel">                              
-                                                        <div class="row">                                                       
-                                                            <div class="col-md-12">                                
-                                                                <h4><strong>JUDUL SURAT <small> (tanggal surat)</small></strong></h4>                                
-                                                                <h4><strong>DOSEN</strong></h4>                                
-                                                            </div>                            
-                                                        </div>                            
-                                                        <div class="row">                                
-                                                            <div class="col-md-12">                                    
-                                                                <blockquote>                                        
-                                                                    <!--<div class="well well-sm">-->                                            
-                                                                        <h4>                                                
-                                                                            <p>
-                                                                                isi surat
-                                                                                <br>
-                                                                            </p>                                            
-                                                                        </h4>                                        
-                                                                    <!--</div>-->                                    
-                                                                </blockquote>                                
-                                                            </div>                           
-                                                        </div>                        
-
-                                                </div> 
-                              </div>
-                          </div>
-                        
+                                </div>                                    
+                                </div>
+                                <!--- button balas collapse-->
+                                <div id="balas" class="panel-collapse collapse">
+                                          <div class="x_panel">   
+                                              <form class="form-horizontal" role="form" action="isiSurat.php"><!-- form balas -->
+                                                <h4><strong><? echo"$JudulPesan[0]"; ?><small> (<? echo"  $TanggalKirim[0]"; ?>)</small></strong></h4>                
+                                                  <h4><strong><? echo"$Penerima[0]"; ?></strong></h4>
+                                                  <br>
+                                                  <div class="form-group">                                                      
+                                                      <div class="col-md-12">
+                                                          <label for="comment">PESAN:</label>
+                                                          <textarea class="form-control" id="text_balas" placeholder="Masukan Pesan" row="10"></textarea>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <div class="col-md-12">
+                                                          <button type="button" class="btn btn-default">Upload File</button>
+                                                          <div class="pull-right">
+                                                          <button type="submit" class="btn btn-default">Kirim Pesan</button>
+                                                          </div>
+                                                      </div>
+                                                  </div>                                                  
+                                              </form><!-- form balas -->
+                                        </div>
+                                    
+                                </div><!-- button balas -->
                             </div>
-                        
-                    
-					</div>
- <div class="clearfix"></div>
-                             
-                            
-				</div>
+                    </div>
+                    <div class="clearfix"></div> 
+                </div><!-- badan -->
   
 				
-                <!-- JS SCRIPT COSTUM -->
+                <!-- JS SCRIPT COSTUM >
                 <script>
-                var element = document.getElementById("listsurat");
-                for(var i=0;i<0;i++){
-                //element.innerHTML = "New Header"+text;
-                document.write(element.innerHTML+"<br>");
-                }
-                </script>
-                <script>
-                        function balas() {
-                            var element = document.getElementById('btn-group');
-                            if (image.src.match("bulbon")) {
-                                image.src = "pic_bulboff.gif";
-                            } else {
-                                image.src = "pic_bulbon.gif";
-                            }
-                                            }
-                </script>
+$(document).ready(function(){
+    
+        $("p").append(" <b>Appended text</b>.");
+
+
+        $("ol").append("<li>Appended item</li>");
+    
+});
+</script>
+         -->      
                 <!-- footer content -->
 				<footer>
 					<div class="copyright-info">
 						<p class="pull-right">Website By: <a href="http://www.unair.ac.id">Universitas Airlangga production		</a>
 						</p>
+                        
 					</div>
 					<div class="clearfix"></div>
 				</footer>
