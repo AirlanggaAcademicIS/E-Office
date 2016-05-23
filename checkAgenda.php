@@ -3,9 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>AGENDA</title>
-<?php
-include ("koneksi.php");
-?>
+
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,6 +13,9 @@ include ("koneksi.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>E.Office | </title>
+	<?php
+     include ("koneksi.php");
+    ?>
 
 	<!-- Bootstrap core CSS -->
 
@@ -35,12 +36,24 @@ include ("koneksi.php");
 	<!--[if lt IE 9]>
 	<script src="../assets/js/ie8-responsive-file-warning.js"></script>
 	<![endif]-->
-
+	
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	<?php
+    $Pengguna=$_GET['pengguna'];
+    $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
+    $hasil=mysql_query ($query);
+        if($hasil==false){
+        echo "DB SEDANG EROR";
+        }else{
+        while ($data = mysql_fetch_array ($hasil)){
+        $jumlahKotakMasuk=$data[0];}}
+		
+    ?>
+
    
 
 </head>
@@ -64,7 +77,7 @@ include ("koneksi.php");
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2>Nama Pengguna</h2>
+							<h2><?php echo $Pengguna ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -81,22 +94,22 @@ include ("koneksi.php");
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="permintaanSurat.php">Permintaan Surat</a>
+										<li><a href="permintaanSurat.php?pengguna=<?php echo $Pengguna ?>">Permintaan Surat</a>
 										</li>
-										<li><a href="memo.php">Buat Memo</a>
+										<li><a href="memo.php?pengguna=<?php echo $Pengguna ?>">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakMasuk.php">Kotak Masuk  <span class="badge">0</span></a>
+                                        <li><a href="kotakMasuk.php?pengguna=<?php echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php echo $jumlahKotakMasuk ?></span></a>
 										</li>
-                                        <li><a href="kotakKeluar.php">Kotak Keluar  <span class="badge">0</span></a>
+                                        <li><a href="kotakKeluar.php?pengguna=<?php echo $Pengguna ?>">Kotak Keluar</a>
 										</li>
                                         
 									</ul>
 								</li>
                                 <li><a><i class="fa fa-edit"></i> Agenda <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="checkAgenda.php">Check Agenda</a>
+										<li><a href="checkAgenda.php?pengguna=<?php echo $Pengguna ?>">Check Agenda</a>
 										</li>
-										<li><a href="tulisAgenda.php">Tulis Acara</a>
+										<li><a href="tulisAgenda.php?pengguna=<?php echo $Pengguna ?>">Tulis Acara</a>
 										</li>
 									</ul>
 								</li>
