@@ -69,7 +69,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2>Nama Pengguna</h2>
+							<h2><? echo $Pengguna ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -86,9 +86,9 @@
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="permintaanSurat.php">Permintaan Surat</a>
+										<li><a href="permintaanSurat.php?pengguna=<? echo $Pengguna ?>">Permintaan Surat</a>
 										</li>
-										<li><a href="memo.php">Buat Memo</a>
+										<li><a href="memo.php?pengguna=<? echo $Pengguna ?>">Buat Memo</a>
 										</li>
                                         <li><a href="kotakMasuk.php?pengguna=<? echo $Pengguna ?>">Kotak Masuk <span class="badge"><? echo $jumlahKotakMasuk ?></span></a>
 										</li>
@@ -99,9 +99,9 @@
 								</li>
                                 <li><a><i class="fa fa-edit"></i> Agenda <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="checkAgenda.php">Check Agenda</a>
+										<li><a href="checkAgenda.php?pengguna=<? echo $Pengguna ?>">Check Agenda</a>
 										</li>
-										<li><a href="tulisAgenda.php">Tulis Acara</a>
+										<li><a href="tulisAgenda.php?pengguna=<? echo $Pengguna ?>">Tulis Acara</a>
 										</li>
 									</ul>
 								</li>
