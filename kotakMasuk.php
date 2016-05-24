@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>E.Office | </title>
-    <? include("koneksi.php"); ?>
+    <?php  include("koneksi.php"); ?>
 
 	<!-- Bootstrap core CSS -->
 
@@ -39,7 +39,7 @@
     
     <!--PERSIAPAN PHP-->
     <!-- menghitung jumlah pesan yang belum terbaca -->
-    <?php
+    <?php 
     $Pengguna=$_GET['pengguna'];
     $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
     $hasil=mysql_query ($query);
@@ -50,7 +50,7 @@
         $jumlahKotakMasuk=$data[0];}}
     ?>
     <!-- menghitung jumlah pesan yang belum terbaca -->
-    <?php
+    <?php 
     $Pengguna=$_GET['pengguna'];
     $query="Select Pengirim,Judul_Pesan,Tanggal_kirim,Status_penerima from pesan where Penerima ='".$Pengguna."' ORDER BY Tanggal_kirim DESC";//Query select list Kotak Pesan
         $hasil=mysql_query ($query);
@@ -83,7 +83,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2>Nama Pengguna</h2>
+							<h2><?php echo $Pengguna ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -96,7 +96,7 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="index.php?pengguna=<? echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
+								<li><a href="index.php?pengguna=<?php  echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
@@ -104,9 +104,9 @@
 										</li>
 										<li><a href="memo.php">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakMasuk.php?pengguna=<? echo $Pengguna ?>">Kotak Masuk <span class="badge"><? echo $jumlahKotakMasuk ?></span></a>
+                                        <li><a href="kotakMasuk.php?pengguna=<?php  echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php  echo $jumlahKotakMasuk ?></span></a>
 										</li>
-                                        <li><a href="kotakKeluar.php?pengguna=<? echo $Pengguna ?>">Kotak Keluar</a>
+                                        <li><a href="kotakKeluar.php?pengguna=<?php  echo $Pengguna ?>">Kotak Keluar</a>
 										</li>
                                         
 									</ul>
@@ -181,20 +181,20 @@
                                     </thead>
                                     <tbody>
                                         <!-- isi dari select Query DB-->
-                                      <?php while ($data = mysql_fetch_array ($hasil)){
+                                      <?php  while ($data = mysql_fetch_array ($hasil)){
                                         $pengirim=$data[$countSurat];
                                         $judulPesan=$data[$countSurat+1];
                                         $tanggal=$data[$countSurat+2];
                                         $statusPenerima=$data[$countSurat+3];
                                         ?>
                                         
-                                        <? if($statusPenerima==0){?><tr bgcolor=#dfbe9f><?}
-                                        else{?><tr><?}?>    
-                                        <td><a href="isiSurat.php?pengguna=<? echo $Pengguna;?>&judulpesan=<? echo $judulPesan;?>"><? echo $pengirim ?></a></td>
-                                        <td><a href="isiSurat.php?pengguna=<? echo $Pengguna;?>&judulpesan=<? echo $judulPesan;?>"><? echo $judulPesan ?></a></td>
-                                        <td><a href="isiSurat.php?pengguna=<? echo $Pengguna;?>&judulpesan=<? echo $judulPesan;?>"><? echo $tanggal ?></a></td>
+                                        <?php  if($statusPenerima==0){?><tr bgcolor=#dfbe9f><?php  }
+                                        else{?><tr><?php   }?>    
+                                        <td><a href="isiSurat.php?pengguna=<?php  echo $Pengguna;?>&judulpesan=<?php  echo $judulPesan;?>"><?php  echo $pengirim ?></a></td>
+                                        <td><a href="isiSurat.php?pengguna=<?php  echo $Pengguna;?>&judulpesan=<?php  echo $judulPesan;?>"><?php  echo $judulPesan ?></a></td>
+                                        <td><a href="isiSurat.php?pengguna=<?php  echo $Pengguna;?>&judulpesan=<?php  echo $judulPesan;?>"><?php  echo $tanggal ?></a></td>
                                         </tr>
-                                      <? }}?>
+                                      <?php  }}?>
                                       <!-- seharusnya seluruh isi tabel terisi -->
                                     </tbody>
                                     </table>

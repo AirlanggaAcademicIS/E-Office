@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>E.Office | </title>
-     <? include("koneksi.php"); ?>
+     <?php  include("koneksi.php"); ?>
 
 	<!-- Bootstrap core CSS -->
 
@@ -36,7 +36,7 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-    <?php
+    <?php 
     $Pengguna=$_GET['pengguna'];
     $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
     $hasil=mysql_query ($query);
@@ -48,7 +48,7 @@
     ?>
 
 </head>
-
+    
 
 <body class="nav-md">
 
@@ -69,7 +69,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2><? echo $Pengguna ?></h2>
+							<h2><?php  echo $Pengguna ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -82,26 +82,26 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="index.php?pengguna=<? echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
+								<li><a href="index.php?pengguna=<?php  echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="permintaanSurat.php?pengguna=<? echo $Pengguna ?>">Permintaan Surat</a>
+										<li><a href="permintaanSurat.php?pengguna=<?php  echo $Pengguna ?>">Permintaan Surat</a>
 										</li>
-										<li><a href="memo.php?pengguna=<? echo $Pengguna ?>">Buat Memo</a>
+										<li><a href="memo.php?pengguna=<?php  echo $Pengguna ?>">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakMasuk.php?pengguna=<? echo $Pengguna ?>">Kotak Masuk <span class="badge"><? echo $jumlahKotakMasuk ?></span></a>
+                                        <li><a href="kotakMasuk.php?pengguna=<?php  echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php  echo $jumlahKotakMasuk ?></span></a>
 										</li>
-                                        <li><a href="kotakKeluar.php?pengguna=<? echo $Pengguna ?>">Kotak Keluar</a>
+                                        <li><a href="kotakKeluar.php?pengguna=<?php  echo $Pengguna ?>">Kotak Keluar</a>
 										</li>
                                         
 									</ul>
 								</li>
                                 <li><a><i class="fa fa-edit"></i> Agenda <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="checkAgenda.php?pengguna=<? echo $Pengguna ?>">Check Agenda</a>
+										<li><a href="checkAgenda.php?pengguna=<?php  echo $Pengguna ?>">Check Agenda</a>
 										</li>
-										<li><a href="tulisAgenda.php?pengguna=<? echo $Pengguna ?>">Tulis Acara</a>
+										<li><a href="tulisAgenda.php?pengguna=<?php  echo $Pengguna ?>">Tulis Acara</a>
 										</li>
 									</ul>
 								</li>
@@ -190,7 +190,7 @@
                             
                             
                                 
-<?php
+<?php 
         include ('koneksi.php');
 	   
 		$query = mysql_query ("select * from event");
@@ -199,17 +199,17 @@
                                 
                                 
 <div class="col-sm-12">
-    <h2><?php echo '<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>  '.$data['Nama'] ?></h2>
+    <h2><?php  echo '<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>  '.$data['Nama'] ?></h2>
     <table class="table table-striped">
         <tr>
      <td>
-        <?php echo $data['Lokasi'] ?>
+        <?php  echo $data['Lokasi'] ?>
       </td>
       <td>
-        <?php echo $data['Tanggal'] ?>
+        <?php  echo $data['Tanggal'] ?>
       </td>
         <td>
-        <?php echo $data['Pukul'] ?>
+        <?php  echo $data['Pukul'] ?>
       </td>
         </tr>
     </table>
@@ -228,7 +228,7 @@
 			
 		</tr>
 -->
-<?php
+<?php 
 
 }
 ?>

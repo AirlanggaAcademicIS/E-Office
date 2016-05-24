@@ -91,7 +91,7 @@ $(document).ready(function(){
     
     ?>
     <!-- untuk menghitung kotak masuk yang belum terbaca -->
-    <?
+    <?php
     $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
     $hasil=mysql_query ($query);
         if($hasil==false){
@@ -135,7 +135,7 @@ $(document).ready(function(){
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2>Nama Pengguna</h2>
+							<h2><?php echo $Pengguna ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -148,7 +148,7 @@ $(document).ready(function(){
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="index.php?pengguna=<? echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
+								<li><a href="index.php?pengguna=<?php echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
@@ -156,9 +156,9 @@ $(document).ready(function(){
 										</li>
 										<li><a href="memo.php">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakMasuk.php?pengguna=<? echo $Pengguna ?>">Kotak Masuk <span class="badge"><? echo $jumlahKotakMasuk ?></span></a>
+                                        <li><a href="kotakMasuk.php?pengguna=<?php echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php echo $jumlahKotakMasuk ?></span></a>
 										</li>
-                                        <li><a href="kotakKeluar.php?pengguna=<? echo $Pengguna ?>">Kotak Keluar</a>
+                                        <li><a href="kotakKeluar.php?pengguna=<?php echo $Pengguna ?>">Kotak Keluar</a>
 										</li>
                                         
 									</ul>
@@ -219,7 +219,7 @@ $(document).ready(function(){
                         <div class="col-md-12 col-sm-12 col-xs-12">
                         <!-- looping listsurat-->
                         <?php while ($data = mysql_fetch_array ($hasil)){
-        
+                        
                         $NoPesan[$countSurat]=$data[0];
                         $JudulPesan[$countSurat]=$data[1];
                         $Tanggal[$countSurat]=$data[2];
@@ -244,7 +244,7 @@ $(document).ready(function(){
                             <div class="x_panel">
                                 <ul class="nav navbar-right panel_toolbox">                   
                                     <li>
-                                        <a class="collapse-link"><? echo"$JudulPesan[$countSurat]"; ?><i class="fa fa-chevron-up"></i></a>                    
+                                        <a class="collapse-link"><?php echo"$JudulPesan[$countSurat]"; ?><i class="fa fa-chevron-up"></i></a>                    
                                     </li>                  
                                 </ul>                                
                                 <div class="x_content">
@@ -253,8 +253,8 @@ $(document).ready(function(){
                                             <img src="images/user.png" class="img-rounded" alt="nama pengguna" width=50px height=50px>                                
                                         </div>                                
                                         <div class="col-md-11">                                
-                                            <h4><strong><? echo"Judul: $JudulPesan[$countSurat]"; ?> <small> (<? echo"$TanggalKirim[$countSurat]"; ?>)</small></strong></h4>                                
-                                            <h4><strong><? echo"Dari: $Pengirim[$countSurat]"; ?></strong></h4>                                
+                                            <h4><strong><?php echo"Judul: $JudulPesan[$countSurat]"; ?> <small> (<?php echo"$TanggalKirim[$countSurat]"; ?>)</small></strong></h4>                                
+                                            <h4><strong><?php echo"Dari: $Pengirim[$countSurat]"; ?></strong></h4>                                
                                         </div>                            
                                     </div>                            
                                     <div class="row">                                
@@ -263,7 +263,7 @@ $(document).ready(function(){
                                                 <!--<div class="well well-sm">-->                                            
                                                     <h4>                                                
                                                         <p>
-                                                            <? echo "$Keterangan[$countSurat]"?>
+                                                            <?php echo "$Keterangan[$countSurat]"?>
                                                             <br>
                                                         </p>                                            
                                                     </h4>                                        
@@ -276,7 +276,7 @@ $(document).ready(function(){
                             
 							
 						</div>
-                   <?  
+                   <?php  
                     ?>
                             </div>
                             <?php $countSurat++;}}?> <!--php closing id listsurat-->
@@ -311,8 +311,8 @@ $(document).ready(function(){
                                 <div id="balas" class="panel-collapse collapse">
                                           <div class="x_panel">   
                                               <form class="form-horizontal" data-toggle="validator" role="form" method="post"><!-- form balas -->
-                                                <h4><strong><? echo"Judul: $JudulPesan[0]"; ?><small></small></strong></h4>                
-                                                  <? $countSurat--; 
+                                                <h4><strong><?php echo"Judul: $JudulPesan[0]"; ?><small></small></strong></h4>                
+                                                  <?php $countSurat--; 
                                                       $penerimaSuratNomer=$countSurat;//penerimaSuratNomer= array untuk penerima surat bukan dirinya sendiri
                                                       while($Pengirim[$penerimaSuratNomer]==$Pengguna && $penerimaSuratNomer!=0){$penerimaSuratNomer--;
                                                      //mencari pengirim balasan
@@ -326,7 +326,7 @@ $(document).ready(function(){
                                                        $PenerimaBalas=$Pengirim[$penerimaSuratNomer]; 
                                                     }
                                                        ?>
-                                                  <h4><strong><? echo"Kepada : $PenerimaBalas"; ?></strong></h4>
+                                                  <h4><strong><?php echo"Kepada : $PenerimaBalas"; ?></strong></h4>
                                                   <br>
                                                   <div class="form-group">                                                      
                                                       <div class="col-md-12">
