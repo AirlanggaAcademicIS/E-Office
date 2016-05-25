@@ -140,7 +140,8 @@ include ("koneksi.php");
 
 
 			<!-- page content -->
-			 <!-- Modal -->
+			
+            <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -200,7 +201,7 @@ include ("koneksi.php");
                       <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="judul">Judul 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="namaeven" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Isi data judul" >
+                        <input type="text" id="judul" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Isi data judul" name='judul' >
                       
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         
@@ -215,13 +216,13 @@ include ("koneksi.php");
                       </label>
                         
                     <div class="form-group has-feedback col-sm-3">  
-                        <input type="date" id="waktu" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                        <input type="date" name="tanggal" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                           <div class="help-block with-errors"></div>
                     </div>
                        
                     <div class="form-group has-feedback col-sm-3">
-                        <input type="time" id="first-name" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                        <input type="time" name="waktu" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
                               <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div class="help-block with-errors"></div>
                     </div>
@@ -235,7 +236,7 @@ include ("koneksi.php");
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12 ">
-                        <textarea class="form-control" rows="3" placeholder="Isi Keterangan Even"></textarea>       </div>
+                        <textarea class="form-control" rows="3" placeholder="Isi Keterangan Even" for="keterangan" name="keterangan"></textarea>       </div>
                     </div><!--keterangan even-->
                                 
                        <div class="form-group row has-feedback">
@@ -249,12 +250,25 @@ include ("koneksi.php");
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         
-                        <button type="submit" class="btn btn-success" >Send</button>
+                        <button type="submit" class="btn btn-success" name = 'submit' value='Simpan'>Send</button>
                       </div>
                     </div>
 
                   </form>
-                  
+<?php 
+if (isset($_POST['submit'])){
+include ('koneksi.php'); 
+    echo 'db sampe sini';
+//$ = int (java)
+$Judul_Pesan=$_POST['judul']; 
+$Tanggal=$_POST['tanggal'];
+$Waktu=$_POST['waktu'];
+$Keterangan=$_POST['keterangan'];
+    
+$input    ="INSERT INTO pesan (judul, tanggal, waktu, keterangan)
+            VALUES ('$Judul_Pesan','$Tanggal','$Waktu','$Keterangan')";
+    mysql_query($input);}
+?>
            
                 </div>
               </div>
