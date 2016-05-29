@@ -184,10 +184,10 @@
                             <div class="x_panel">
                                 <div class="pull-left">                                
                                     <button type="button" class="btn btn-warning">LIHAT FILE</button>
-                                </div>
+                                </div>;
                                 <div class="pull-right">                    
                                     <button type="button" class="btn btn-primary">BALAS</button>                    
-                                    <button type="button" class="btn btn-success">TERUSKAN</button>
+                                    <a href="Forward.php"><button type="button" class="btn btn-success">TERUSKAN</button></a>
                                 </div>
                                 <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
