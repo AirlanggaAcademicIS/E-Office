@@ -36,6 +36,16 @@
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
+	<script language="javascript">
+	// script check all
+	function toggle(pilih) {
+	checkboxes = document.getElementsByName('check_list[]');
+	for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = pilih.checked;
+	}
+	}
+	</script>
+
 </head>
 
 
@@ -158,6 +168,7 @@
 
   </p>
   <p>Nama Dosen :</p>
+  <p><input type="checkbox" onClick="toggle(this)"> Select All</p>
   </p>
 	<?php 
 	
@@ -171,7 +182,7 @@
 		while($data=mysql_fetch_array($hasil))
 		{
 			echo "<div class='checkbox'>
-    <label><input type='checkbox' value='".$data['nama_karyawan']."'> ".$data['nama_karyawan']." </label></div>";
+    <label><input type='checkbox' name='check_list[]' value='".$data['nama_karyawan']."'> ".$data['nama_karyawan']." </label></div>";
 		}	}
 		
 	 else{
@@ -181,7 +192,7 @@
 		while($data=mysql_fetch_array($hasil))
 		{
 			echo "<div class='checkbox'>
-    <label><input type='checkbox' value='".$data['nama_karyawan']."'> ".$data['nama_karyawan']." </label></div>";
+    <label><input type='checkbox' name='check_list[]' value='".$data['nama_karyawan']."'> ".$data['nama_karyawan']." </label></div>";
 		}	}}
 	?>
 	
