@@ -83,7 +83,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2><?php echo $Pengguna ?></h2>
+							<h2><?php  echo $Pengguna; ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -188,8 +188,8 @@
                                         $statusPenerima=$data[$countSurat+3];
                                         ?>
                                         
-                                        <?php  if($statusPenerima==0){?><tr bgcolor=#dfbe9f><?php  }
-                                        else{?><tr><?php   }?>    
+                                        <?php  if($statusPenerima==0){?><tr bgcolor=#dfbe9f><?php }
+                                        else{?><tr><?php }?>    
                                         <td><a href="isiSurat.php?pengguna=<?php  echo $Pengguna;?>&judulpesan=<?php  echo $judulPesan;?>"><?php  echo $pengirim ?></a></td>
                                         <td><a href="isiSurat.php?pengguna=<?php  echo $Pengguna;?>&judulpesan=<?php  echo $judulPesan;?>"><?php  echo $judulPesan ?></a></td>
                                         <td><a href="isiSurat.php?pengguna=<?php  echo $Pengguna;?>&judulpesan=<?php  echo $judulPesan;?>"><?php  echo $tanggal ?></a></td>

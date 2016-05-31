@@ -79,7 +79,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2><?php echo $Pengguna ?></h2>
+							<h2><?php  echo $Pengguna; ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->

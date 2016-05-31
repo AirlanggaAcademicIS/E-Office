@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>E.Office | </title>
-    <?php include ("koneksi.php"); ?>
+    <?php  include ("koneksi.php"); ?>
 	<!-- Bootstrap core CSS -->
 
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -22,11 +22,13 @@
 	<link rel="stylesheet" type="text/css" href="css/maps/jquery-jvectormap-2.0.3.css" />
 	<link href="css/icheck/flat/green.css" rel="stylesheet" />
 	<link href="css/floatexamples.css" rel="stylesheet" type="text/css" />
-    
 
-	<script src="js/jquery.min.js"></script>
-	<script src="js/nprogress.js"></script>
-   
+	<script src="js/jquery.ui.autocomplete.html.js" />
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<!--[if lt IE 9]>
 	<script src="../assets/js/ie8-responsive-file-warning.js"></script>
 	<![endif]-->
@@ -36,62 +38,42 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+<!-- menghilangkan btn -->
 <script>
 $(document).ready(function(){
     $("#btn_balas").click(function(){
         $("#btn_balas").remove();
+        $("#btn_teruskan").remove();
     });
 });
 </script>
-   
+<script>
+$(document).ready(function(){
+    $("#btn_teruskan").click(function(){
+        $("#btn_balas").remove();
+        $("#btn_teruskan").remove();
+    });
+});
+</script>
+<!-- /menghilangkan btn --> 
     
+<!-- list teruskan -->    
+
+  <!-- /list teruskan -->  
 </head>
 
 
 <body class="nav-md">
  <!--persiapan data PHP-->
     
-    <?php
-    /*
-    $judulpesan=$_GET['judulpesan'];
-    $query1="Select No_Pesan from pesan where Judul_Pesan='".$judulpesan."'"; //Query select Judul Surat
-    $hasil=mysql_query ($query1);
-    $i=0; //$i untuk menghitung jumlah surat
-    while ($data = mysql_fetch_array ($hasil)){
-        $NoPesan[$i]=$data[0]; //Mendapatkan no pesan dengan judul
-        echo $data[0];
-        $query2="Select * from pesan where No_Pesan='".$NoPesan[$i]."'"; //Query select isi dari judul surat
-        $hasil2=mysql_query ($query2);
-        if($hasil2==false){
-        echo "salah";
-        }else{
-        //$countSurat=0;
-        while ($data2 = mysql_fetch_array ($hasil2)){
-        $NoPesan[$i]=$data2[0];
-        $JudulPesan[$i]=$data2[1];
-        $Tanggal[$i]=$data2[2];
-        $Waktu[$i]=$data2[3];
-        $Keterangan[$i]=$data2[4];
-        $Pengirim[$i]=$data2[6];
-        $Penerima[$i]=$data2[7];
-        $TanggalKirim[$i]=$data2[8];
-        $StatusPengirim[$i]=$data2[9];
-        $StatusPenerima[$i]=$data2[10];
-       // $countSurat++;
-    }
-    }
-        $i++;
-    }
-    */ 
-    ?>   <!-- eror-->
-    <?php
+    <?php 
     $Pengguna=$_GET['pengguna'];
     $judulPesan=$_GET['judulpesan'];
-    //membedakan penerima dengan pengirim sudah baca atau belum
+    
     
     ?>
     <!-- untuk menghitung kotak masuk yang belum terbaca -->
-    <?php
+    <?php 
     $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
     $hasil=mysql_query ($query);
         if($hasil==false){
@@ -100,24 +82,60 @@ $(document).ready(function(){
         while ($data = mysql_fetch_array ($hasil)){
         $jumlahKotakMasuk=$data[0];}}
        
-    ?> <!-- untuk menghitung kotak masuk yang belum terbaca -->
+    ?><!-- untuk menghitung kotak masuk yang belum terbaca -->
+    
+    
+    <!-- untuk mencari nama pegawai pada text box Teruskan -->
+    <?php 
+            $query="Select Nama_Pegawai from pegawai";//Query select nama pegawai
+            $hasil=mysql_query($query);
+            if($hasil==false){
+                echo "tidak ada nama pegawai pada database";
+            }else{
+            $i=0;
+            while ($data = mysql_fetch_array ($hasil)){
+            $namaPegawai[$i]=$data[0];
+            $i++;
+            }}
+    ?>
+   
+    <!-- Jscript untuk tiap nama pegawai sebagai tujuan pada input teruskan-->
+<script>
+$(document).ready(function(){
+    var sumber = [];<?php  $i=0; ?>
+    var i=0;
+    var panjang=<?php  echo json_encode(count($namaPegawai)); ?>;
+  <?php  foreach($namaPegawai as $key => $val){ ?>  
+        sumber[i]=<?php  echo json_encode($val);?>;
+    i++;
+   <?php   } ?>
+$( "#teruskanKepada" ).autocomplete({
+  source: sumber,
+    minLength: 2
+});
+});
+</script>
+    <!-- /Jscript untuk tiap nama pegawai sebagai tujuan pada input teruskan-->
+    
     
     <!--untuk menlist banyak surat -->
-    <?php
+    <?php 
     
         $query="Select * from pesan where Judul_Pesan='".$judulPesan."'"; //Query select seluruhnya dari judul surat
         $hasil=mysql_query ($query);
         if($hasil==false){
-        echo "salah";
+        echo "tidak ada list surat";
         }else{
         $countSurat=0;
        
     
     
     ?>
-    <!--untuk menlist banyak surat -->
+    <!--/untuk menlist banyak surat -->
+    <!-- setelah php di atas, jangan menutup atau membuat php baru karna else di atas belum ada tutupan -->
     
-<!--persiapan data PHP-->    
+    
+    
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -135,7 +153,7 @@ $(document).ready(function(){
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2><?php echo $Pengguna ?></h2>
+							<h2><?php  echo $Pengguna; ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -148,7 +166,7 @@ $(document).ready(function(){
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="index.php?pengguna=<?php echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
+								<li><a href="index.php?pengguna=<?php  echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
@@ -156,9 +174,9 @@ $(document).ready(function(){
 										</li>
 										<li><a href="memo.php">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakMasuk.php?pengguna=<?php echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php echo $jumlahKotakMasuk ?></span></a>
+                                        <li><a href="kotakMasuk.php?pengguna=<?php  echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php  echo $jumlahKotakMasuk ?></span></a>
 										</li>
-                                        <li><a href="kotakKeluar.php?pengguna=<?php echo $Pengguna ?>">Kotak Keluar</a>
+                                        <li><a href="kotakKeluar.php?pengguna=<?php  echo $Pengguna ?>">Kotak Keluar</a>
 										</li>
                                         
 									</ul>
@@ -215,16 +233,18 @@ $(document).ready(function(){
 			<!-- page content -->
 			<div class="right_col" role="main">
 
-				<div class="row"><!--badan-->
+				<div class="row">
+                    <!--badan-->
                         <div class="col-md-12 col-sm-12 col-xs-12">
                         <!-- looping listsurat-->
-                        <?php while ($data = mysql_fetch_array ($hasil)){
-                        
+                        <?php  while ($data = mysql_fetch_array ($hasil)){
+        
                         $NoPesan[$countSurat]=$data[0];
                         $JudulPesan[$countSurat]=$data[1];
                         $Tanggal[$countSurat]=$data[2];
                         $Waktu[$countSurat]=$data[3];
                         $Keterangan[$countSurat]=$data[4];
+                        $NamaFile[$countSurat]=$data[5];
                         $Pengirim[$countSurat]=$data[6];
                         $Penerima[$countSurat]=$data[7];
                         $TanggalKirim[$countSurat]=$data[8];
@@ -233,10 +253,10 @@ $(document).ready(function(){
                         if($Pengguna==$Penerima[$countSurat]){
     $queryStatusPenerima="UPDATE pesan SET Status_penerima = 1 WHERE No_Pesan='".$NoPesan[$countSurat]."'";
     mysql_query ($queryStatusPenerima);}
-        else{
+        else{if($Pengguna==$Pengirim[$countSurat]){
     $queryStatusPenerima="UPDATE pesan SET Status_pengirim = 1 WHERE No_Pesan='".$NoPesan[$countSurat]."'";
     mysql_query ($queryStatusPenerima);
-        }
+        }}
                             ?>
 						<div id="listsurat">
                             <div class="dashboard_graph">
@@ -244,7 +264,7 @@ $(document).ready(function(){
                             <div class="x_panel">
                                 <ul class="nav navbar-right panel_toolbox">                   
                                     <li>
-                                        <a class="collapse-link"><?php echo"$JudulPesan[$countSurat]"; ?><i class="fa fa-chevron-up"></i></a>                    
+                                        <a class="collapse-link"><?php  echo"$JudulPesan[$countSurat]"; ?><i class="fa fa-chevron-up"></i></a>                    
                                     </li>                  
                                 </ul>                                
                                 <div class="x_content">
@@ -253,8 +273,12 @@ $(document).ready(function(){
                                             <img src="images/user.png" class="img-rounded" alt="nama pengguna" width=50px height=50px>                                
                                         </div>                                
                                         <div class="col-md-11">                                
-                                            <h4><strong><?php echo"Judul: $JudulPesan[$countSurat]"; ?> <small> (<?php echo"$TanggalKirim[$countSurat]"; ?>)</small></strong></h4>                                
-                                            <h4><strong><?php echo"Dari: $Pengirim[$countSurat]"; ?></strong></h4>                                
+                                            <h4><strong><?php  echo"Judul Pesan: $JudulPesan[$countSurat]"; ?> <small> (<?php  echo"$TanggalKirim[$countSurat]"; ?>)</small></strong></h4>                                
+                                            <h4><strong>
+                                                <?php  echo"Untuk: $Penerima[$countSurat]";?>
+                                                <?php  echo "<br>"; ?>
+                                                <?php  echo"Dari: $Pengirim[$countSurat]"; ?>
+                                                </strong></h4>                                
                                         </div>                            
                                     </div>                            
                                     <div class="row">                                
@@ -263,23 +287,30 @@ $(document).ready(function(){
                                                 <!--<div class="well well-sm">-->                                            
                                                     <h4>                                                
                                                         <p>
-                                                            <?php echo "$Keterangan[$countSurat]"?>
+                                                            <?php  echo "$Keterangan[$countSurat]"?>
                                                             <br>
                                                         </p>                                            
                                                     </h4>                                        
                                                 <!--</div>-->                                    
                                             </blockquote>                                
                                         </div>                           
-                                    </div>                        
+                                    </div>
+                                <div class="pull-left"> 
+                                <?php  if($NamaFile[$countSurat]!="tidak ada"){ ?> 
+                                <form method="post" action="upload/<?php  echo $NamaFile[$countSurat] ?>" target="_blank">
+                                <button type="submit" class="btn btn-warning" >LIHAT FILE</button>
+                                </form>
+                                <?php  } ?>    
+                                </div>
                                 </div>                                
                             </div>
                             
 							
 						</div>
-                   <?php  
+                   <?php   
                     ?>
                             </div>
-                            <?php $countSurat++;}}?> <!--php closing id listsurat-->
+                            <?php  $countSurat++;}} ?> <!--php closing id listsurat-->
                             
                 <!-- JScript looping isi surat-->
                 <script> 
@@ -297,12 +328,10 @@ $(document).ready(function(){
                 <!-- JScript looping isi surat -->
                             
                             <div class="x_panel">
-                                <div class="pull-left">                                
-                                    <button type="button" class="btn btn-warning">LIHAT FILE</button>
-                                </div>
+                                
                                 <div class="pull-right">
                                 <div class="panel-group" id="accordion">
-                                
+                                <button id="btn_teruskan" type="button" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#teruskan" >TERUSKAN</button>
                                 <button id="btn_balas" type="button" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#balas" >BALAS</button>
                                 
                                 </div>                                    
@@ -310,15 +339,14 @@ $(document).ready(function(){
                                 <!--- button balas collapse-->
                                 <div id="balas" class="panel-collapse collapse">
                                           <div class="x_panel">   
-                                              <form class="form-horizontal" data-toggle="validator" role="form" method="post"><!-- form balas -->
-                                                <h4><strong><?php echo"Judul: $JudulPesan[0]"; ?><small></small></strong></h4>                
-                                                  <?php $countSurat--; 
+                                              <!-- form balas -->
+                                              <form class="form-horizontal" data-toggle="validator" role="form" method="post" enctype="multipart/form-data">
+                                                <h4><strong><?php  echo"Judul: $JudulPesan[0]"; ?><small></small></strong></h4>                
+                                                  <?php  $countSurat--; 
                                                       $penerimaSuratNomer=$countSurat;//penerimaSuratNomer= array untuk penerima surat bukan dirinya sendiri
                                                       while($Pengirim[$penerimaSuratNomer]==$Pengguna && $penerimaSuratNomer!=0){$penerimaSuratNomer--;
                                                      //mencari pengirim balasan
                                                       }
-                                                     
-                                                    
                                                     if($Pengirim[$penerimaSuratNomer]==$Pengguna){
                                                         $PenerimaBalas=$Penerima[$countSurat];
                                                         //Mengirim pada penerima surat ketika belum ada balasan   
@@ -326,39 +354,218 @@ $(document).ready(function(){
                                                        $PenerimaBalas=$Pengirim[$penerimaSuratNomer]; 
                                                     }
                                                        ?>
-                                                  <h4><strong><?php echo"Kepada : $PenerimaBalas"; ?></strong></h4>
+                                                  <h4><strong><?php  echo"Kepada : $PenerimaBalas "; ?></strong></h4>
+                                                  
+                                                  
+                                                  
                                                   <br>
+                                                  <!-- pesan-->
                                                   <div class="form-group">                                                      
                                                       <div class="col-md-12">
                                                           <label for="comment">PESAN:</label>
                                                           <textarea class="form-control" id="text_balas" placeholder="Masukan Pesan" row="10" name="keterangan"></textarea>
                                                       </div>
                                                   </div>
+                                                  <!-- /pesan-->
+                                                  <!-- file-->
+                                                  <div class="form-group">                                                      
+                                                      <div class="col-md-12">
+                                                        <label for="fileSelect">Filename:</label>
+                                                        <input type="file" name="photo" id="fileSelect"><br>
+                                                      </div>
+                                                  </div>
+                                                  <!-- /file-->
+                                                  <!-- tombol kirim-->
                                                   <div class="form-group">
                                                       <div class="col-md-12">
-                                                          <button type="button" class="btn btn-default">Upload File</button>
                                                           <div class="pull-right">
-                                                          <button type="submit" name="submit" class="btn btn-primary">Kirim Pesan</button>
-                                            <?php
-                                              if (isset($_REQUEST['submit'])){
+                                                          <button type="submit" name="submitBalas" class="btn btn-primary">Kirim Pesan</button>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <!-- /tombol kirim-->
+                                                  <!-- /form balas -->
+                                                  </form>
+                                                  
+                                        <!-- jika tombol kirim di tekan -->
+                            <?php 
+                            // cek upload file 
+                            $adaFile=false;
+                            $namaFile="tidak ada";
+                            if(isset($_FILES["photo"]["name"])){
+                            if($_FILES["photo"]["error"] > 0){
+                            echo "Error: " . $_FILES["photo"]["error"] . "<br>";
+                            } else{
+                            $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png", "doc" => "application/msword", "docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "pdf" => "application/pdf");
+                            $filename = $_FILES["photo"]["name"];
+                            $filetype = $_FILES["photo"]["type"];
+                            $filesize = $_FILES["photo"]["size"];
+                            // Verify file extension
+                            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                            if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
+                            // Verify file size - 5MB maximum
+                            $maxsize = 5 * 1024 * 1024;
+                            if($filesize > $maxsize) die("Error: File size is larger than the allowed limit.");
+                            // Verify MYME type of the file
+                            if(in_array($filetype, $allowed)){
+                                // Check whether file exists before uploading it
+                                /*
+                                if(file_exists("upload/" . $_FILES["photo"]["name"])){
+                                    $pesanAlert="FILE".$_FILES["photo"]["name"]. "sudah ter upload";
+                                    echo "<script type='text/javascript'>alert('$pesanAlert');</script>";
+                                } else{
+                                    $adaFile=true;
+                                    $pesanAlert="FILE".$_FILES["photo"]["name"]. "sudah ter upload";
+                                    echo "<script type='text/javascript'>alert('$pesanAlert');</script>";
+                                } 
+                            } else{
+                                echo "Error: There was a problem uploading your file - please try again."; 
+                            }}}    */
+                                $adaFile=true;}
+                            }}
+                                              
+                                    //kirim isi pesan balas
+                                    if (isset($_REQUEST['submitBalas'])){
+                                    //cek apakah ada file
+                                    if($adaFile==true){
+                                    $root=getcwd();
+                                    move_uploaded_file($_FILES["photo"]["tmp_name"], $root."/upload/".$_FILES["photo"]["name"]);
+                                    $namaFile=$_FILES["photo"]["name"];
+                                    }
+                                    // mengambil isi pesan dan menambahkan pada DB
                                                   $KeteranganBalas=$_POST['keterangan'];
                                                   $PengirimBalas=$Pengguna;
                                                   $TanggalBalas=date("Y-m-d");
-                                                  $query ="INSERT INTO pesan (No_Pesan,Judul_Pesan,Tanggal,Waktu,Keterangan,Pengirim,Penerima,Tanggal_kirim,Status_pengirim,Status_penerima) VALUES ('null','$JudulPesan[0]','$Tanggal[0]','$Waktu[0]','$KeteranganBalas','$PengirimBalas','$PenerimaBalas','$TanggalBalas','0','0')";
+                                                  $query ="INSERT INTO pesan (No_Pesan,Judul_Pesan,Tanggal,Waktu,Keterangan,File,Pengirim,Penerima,Tanggal_kirim,Status_pengirim,Status_penerima) VALUES ('null','$JudulPesan[0]','$Tanggal[0]','$Waktu[0]','$KeteranganBalas','$namaFile','$PengirimBalas','$PenerimaBalas','$TanggalBalas','0','0')";
                                                   mysql_query ($query);
                                               }
+                                                  //tutup kirim pesan
+                                              ?>  
+                                        <!-- /jika tombol kirim di tekan -->                                                
                                               
-                                              
-                                              ?>
-                                                          </div>
-                                                      </div>
-                                                  </div>                                                  
-                                              </form><!-- form balas -->
                                               <!-- setelah tombol submit di tekan-->
                                               
                                         </div>
                                     
-                                </div><!-- button balas -->
+                                </div>
+                                <!-- /button balas -->
+                                
+                                <!--- button teruskan collapse-->
+                                <div id="teruskan" class="panel-collapse collapse">
+                                          <div class="x_panel">   
+                                              <!-- form teruskan -->
+                                              <form class="form-horizontal" data-toggle="validator" role="form" method="post" enctype="multipart/form-data">
+                                                <h4><strong><?php  echo "Judul: $JudulPesan[0]"; ?></strong></h4>                
+                                                  <div class="form-group">                                                      
+                                                      <div class="col-md-12">
+                                                          <label for="teruskanKepada"><strong>TERUSKAN KEPADA:</strong></label>
+                                                          <input type="text" id="teruskanKepada" placeholder="Masukan Penerima" name="teruskanKepada">
+                                                      </div>
+                                                  </div>
+                                                  <br>
+                                                  <!-- pesan-->
+                                                  <div class="form-group">                                                      
+                                                      <div class="col-md-12">
+                                                          <label for="comment">PESAN:</label>
+                                                          <textarea class="form-control" id="text_balas" placeholder="Masukan Pesan" row="10" name="keterangan"></textarea>
+                                                      </div>
+                                                  </div>
+                                                  <!-- /pesan-->
+                                                  <!-- file-->
+                                                  <div class="form-group">                                                      
+                                                      <div class="col-md-12">
+                                                        <label for="fileSelect">Filename:</label>
+                                                        <input type="file" name="photo" id="fileSelect"><br>
+                                                      </div>
+                                                  </div>
+                                                  <!-- /file-->
+                                                  <!-- tombol kirim-->
+                                                  <div class="form-group">
+                                                      <div class="col-md-12">
+                                                          <div class="pull-right">
+                                                          <button type="submit" name="submitTeruskan" class="btn btn-primary">Kirim Pesan</button>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <!-- /tombol kirim-->
+                                                  <!-- /form balas -->
+                                                  </form>
+                                                  
+                                        <!-- jika tombol kirim di tekan -->
+                            <?php 
+                            // cek upload file 
+                            $adaFile=false;
+                            $namaFile="tidak ada";
+                            if(isset($_FILES["photo"]["name"])){
+                            if($_FILES["photo"]["error"] > 0){
+                            echo "Error: " . $_FILES["photo"]["error"] . "<br>";
+                            } else{
+                            $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png", "doc" => "application/msword", "docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "pdf" => "application/pdf");
+                            $filename = $_FILES["photo"]["name"];
+                            $filetype = $_FILES["photo"]["type"];
+                            $filesize = $_FILES["photo"]["size"];
+                            // Verify file extension
+                            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                            if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
+                            // Verify file size - 5MB maximum
+                            $maxsize = 5 * 1024 * 1024;
+                            if($filesize > $maxsize) die("Error: File size is larger than the allowed limit.");
+                            // Verify MYME type of the file
+                            if(in_array($filetype, $allowed)){
+                                // Check whether file exists before uploading it
+                                /*
+                                if(file_exists("upload/" . $_FILES["photo"]["name"])){
+                                    $pesanAlert="FILE".$_FILES["photo"]["name"]. "sudah ter upload";
+                                    echo "<script type='text/javascript'>alert('$pesanAlert');</script>";
+                                } else{
+                                    $adaFile=true;
+                                    $pesanAlert="FILE".$_FILES["photo"]["name"]. "sudah ter upload";
+                                    echo "<script type='text/javascript'>alert('$pesanAlert');</script>";
+                                } 
+                            } else{
+                                echo "Error: There was a problem uploading your file - please try again."; 
+                            }}}    */
+                                $adaFile=true;}
+                            }}
+                                              
+                                    //kirim isi pesan teruskan
+                                    if (isset($_REQUEST['submitTeruskan'])){
+                                    //cek apakah ada file
+                                    if($adaFile==true){
+                                    $root=getcwd();
+                                    move_uploaded_file($_FILES["photo"]["tmp_name"], $root."/upload/".$_FILES["photo"]["name"]);
+                                    $namaFile=$_FILES["photo"]["name"];
+                                    }
+                                                //memulai proses membalas, identifikasi penerima pengirim dan isi pesan=keteranganBalas
+                                                  $KeteranganBalas=$_POST['keterangan'];
+                                                  $PengirimBalas=$Pengguna;
+                                                  $calonPenerimaBalas=$_POST['teruskanKepada'];
+                                                  $calonPenerimaBalasStatus=false;
+                                        //cek apakah penerima balas ada di list pegawai
+                                        foreach($namaPegawai as $key => $val){
+                                               if($calonPenerimaBalas==$val){
+                                                $calonPenerimaBalasStatus=true;
+                                                $PenerimaBalas=$_POST['teruskanKepada'];
+                                                  $TanggalBalas=date("Y-m-d");
+                                                  $query ="INSERT INTO pesan (No_Pesan,Judul_Pesan,Tanggal,Waktu,Keterangan,File,Pengirim,Penerima,Tanggal_kirim,Status_pengirim,Status_penerima) VALUES ('null','$JudulPesan[0]','$Tanggal[0]','$Waktu[0]','$KeteranganBalas','$namaFile','$PengirimBalas','$PenerimaBalas','$TanggalBalas','0','0')";
+                                                  mysql_query ($query);
+                                            }
+                                        }
+                                        if($calonPenerimaBalasStatus==false){
+                                            //jika penerima balas!= nama pegawai yang ada
+                                            echo '<script type=text/javascript> alert("Tujuan pesan tidak ditemukan, silahkan masukan ulang"); </script>';
+                                        }
+                                                  
+                                              }
+                                                  //tutup kirim pesan
+                                              ?>  
+                                        <!-- /jika tombol kirim teruskan di tekan -->                                                
+                                              
+                                    
+                                              
+                                        </div>
+                                    
+                                </div><!-- button Teruskan -->
                             </div>
                     </div>
                     <div class="clearfix"></div> 
