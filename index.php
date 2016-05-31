@@ -51,6 +51,15 @@
     
 
 <body class="nav-md">
+    
+    <style>
+        .fixed-panel {
+          min-height: 10px;
+          max-height: 400px;
+          overflow-y: scroll;
+            overflow-x: hidden;
+        }
+    </style>
 
 	<div class="container body">
 		<div class="main_container">
@@ -179,13 +188,16 @@
                     <div class="col-md-4">
                     <div class="row x_title"> <h1>Berita</h1> </div>
                         
+                        <div class="table fixed-panel">
+                            Ubah konten disini !
+                        </div>
                         
                     </div>
                     
                     <div class="col-md-4">
                     <div class="row x_title"> <h1>Event</h1> </div>
                         
-                        <div class="table">
+                        <div class="table fixed-panel">
                             <div class="row">
                             
                             
@@ -237,7 +249,11 @@
                     </div>
                     
                     <div class="col-md-4">
-                    <div class="row x_title"> <h1>Notifikasi</h1> </div>
+                    <div class="row x_title"> <h1>Notifikasi</h1></div>
+                        
+                        <div class="table fixed-panel">
+                            Ubah konten disini !
+                        </div>
                     </div>
                 </div>
                   
