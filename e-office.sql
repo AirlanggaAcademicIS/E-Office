@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 23, 2016 at 10:44 AM
+-- Generation Time: May 31, 2016 at 09:20 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -101,6 +101,16 @@ CREATE TABLE `pegawai` (
   `Gelar` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pegawai`
+--
+
+INSERT INTO `pegawai` (`Nip`, `Password`, `Nama_Pegawai`, `Alamat`, `Telp_Pegawai`, `Email_Pegawai`, `Jabatan`, `Gelar`) VALUES
+(813112234, 'bebas', 'Dosen', 'jalan sana', 81311633, 'dosen@unair.com', 'dosen', 'sarjana'),
+(813112333, 'bebas', 'Kadep', 'jalan sana', 81311633, 'kadep@unair.com', 'dosen', 'sarjana'),
+(813112335, 'bebas', 'Ilham', 'jalan sana', 81311633, 'kadep@unair.com', 'dosen', 'sarjana'),
+(813112336, 'bebas', 'TU', 'jalan sana', 81311633, 'kadep@unair.com', 'dosen', 'sarjana');
+
 -- --------------------------------------------------------
 
 --
@@ -113,7 +123,7 @@ CREATE TABLE `pesan` (
   `Tanggal` date NOT NULL,
   `Waktu` time NOT NULL,
   `Keterangan` varchar(1000) NOT NULL,
-  `File` blob NOT NULL,
+  `File` varchar(50) NOT NULL,
   `Pengirim` varchar(30) NOT NULL,
   `Penerima` varchar(30) NOT NULL,
   `Tanggal_kirim` date NOT NULL,
@@ -126,27 +136,12 @@ CREATE TABLE `pesan` (
 --
 
 INSERT INTO `pesan` (`No_Pesan`, `Judul_Pesan`, `Tanggal`, `Waktu`, `Keterangan`, `File`, `Pengirim`, `Penerima`, `Tanggal_kirim`, `Status_pengirim`, `Status_penerima`) VALUES
-(1, 'Test', '2016-05-21', '12:00:00', 'ini surat coba coba', '', 'Dosen', 'Kadep', '2016-05-21', 1, 1),
-(2, 'Test', '2016-05-21', '12:00:00', 'Ini Surat ke DUA', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
-(3, 'Test', '2016-05-21', '12:00:00', 'ini surat ke tiga', '', 'Dosen', 'Kadep', '2016-05-21', 1, 1),
-(53, 'Test', '2016-05-21', '12:00:00', 'ini yang ke empat', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
-(54, 'Test2', '2016-05-21', '12:00:00', 'ini email Test 2', '', 'TU', 'Dosen', '2016-05-22', 0, 1),
-(55, 'Test', '2016-05-21', '12:00:00', 'ini yang ke empat', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
-(57, 'Test', '2016-05-21', '12:00:00', 'ini yang ke lima', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
-(58, 'Test', '2016-05-21', '12:00:00', 'ini yang ke enam untuk dosen', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
-(59, 'Test', '2016-05-21', '12:00:00', 'ini yang ke tujuh untuk kadep', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
-(60, 'Test', '2016-05-21', '12:00:00', 'ini yang ke delapan untuk kadep, yang ke tujuh seharusnya untuk dosen', '', 'Dosen', 'Kadep', '2016-05-21', 1, 1),
-(61, 'Test2', '2016-05-21', '12:00:00', 'coba ini dah', '', 'TU', 'Dosen', '2016-05-22', 0, 1),
-(62, 'Test', '2016-05-21', '12:00:00', 'ini yang ke sembilan\r\nkalau yang ini?harus bisa\r\noke', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
-(63, 'Test', '2016-05-21', '12:00:00', 'ini yang ke 10, sip semua benar', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
-(64, 'Test 3', '2016-05-21', '12:00:00', 'ini Surat TEST 3', '', 'Kadep', 'Dosen', '2016-05-23', 1, 1),
-(65, 'Test', '2016-05-21', '12:00:00', 'heah', '', 'Kadep', 'Dosen', '2016-05-22', 1, 1),
-(66, 'Test', '2016-05-21', '12:00:00', 'satu lagi', '', 'Kadep', 'Dosen', '2016-05-22', 1, 1),
-(67, 'Test', '2016-05-21', '12:00:00', 'terakhir deh', '', 'Kadep', 'Dosen', '2016-05-22', 1, 1),
-(68, 'Test', '2016-05-21', '12:00:00', 'coba ini salah', '', 'Dosen', 'Kadep', '2016-05-23', 1, 0),
-(69, 'Test', '2016-05-21', '12:00:00', 'coba ini salah', '', 'Dosen', 'Kadep', '2016-05-23', 1, 0),
-(70, 'Test', '2016-05-21', '12:00:00', 'coba ini salah', '', 'Dosen', 'Kadep', '2016-05-23', 1, 0),
-(71, 'Test', '2016-05-21', '12:00:00', 'coba ini salah', '', 'Dosen', 'Kadep', '2016-05-23', 0, 0);
+(1, 'Test', '2016-05-21', '12:00:00', 'ini surat coba coba', 'tidak ada', 'Dosen', 'Kadep', '2016-05-21', 1, 1),
+(7, 'Test', '2016-05-21', '12:00:00', 'coba ini yaaa', 'tidak ada', 'Kadep', 'Dosen', '2016-05-31', 1, 1),
+(8, 'Test', '2016-05-21', '12:00:00', 'buat ilham', 'tidak ada', 'Kadep', 'Ilham', '2016-05-31', 1, 1),
+(9, 'Test', '2016-05-21', '12:00:00', 'buat dosen dari ilham', 'tidak ada', 'Ilham', 'Dosen', '2016-05-31', 1, 1),
+(10, 'Test', '2016-05-21', '12:00:00', 'coba ini yaa', 'tidak ada', 'Dosen', 'TU', '2016-05-31', 1, 0),
+(11, 'Test', '2016-05-21', '12:00:00', 'buat ilham dari Dosen', 'tidak ada', 'Dosen', 'Ilham', '2016-05-31', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -157,6 +152,12 @@ INSERT INTO `pesan` (`No_Pesan`, `Judul_Pesan`, `Tanggal`, `Waktu`, `Keterangan`
 --
 ALTER TABLE `event`
   ADD PRIMARY KEY (`id_agenda`);
+
+--
+-- Indexes for table `pegawai`
+--
+ALTER TABLE `pegawai`
+  ADD PRIMARY KEY (`Nip`);
 
 --
 -- Indexes for table `pesan`
@@ -177,7 +178,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
-  MODIFY `No_Pesan` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `No_Pesan` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
