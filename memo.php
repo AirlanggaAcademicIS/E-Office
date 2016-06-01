@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>E.Office | </title>
-
+      <?php  include("koneksi.php"); ?>
 	<!-- Bootstrap core CSS -->
 
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -142,14 +142,10 @@
 								<div class="col-md-6">
 									<h3>E-Office! <small>Online Mail</small></h3>
 								</div>
-								<div class="col-md-6">
-
-								</div>
-							</div>
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
+								<div class="col-mid-6">
+ <div class="x_panel">
                 <div class="x_title">
-                  <h2>Lembar Disposisi Fakultas Sains dan Teknologi <small></small></h2>
+                  <h2>LEMBAR DISPOSISI FAKULTAS SAINS DAN TEKNOLOGI </h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -158,10 +154,10 @@
                 </div>
                 <div class="x_content">
                   <br>
-                  <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                  <form data-toggle="validator" role="form" method="post" id="demo-form2" class="form-horizontal form-label-left"  >
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Identitas Surat <span class="required"></span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">IDENTITAS SURAT <span class="required"></span>
                       </label>
                       
                     </div>
@@ -169,86 +165,61 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no-agenda">No.Agenda <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12 " data-parsley-id="1360"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                        <input type="text" name="agenda"  required="required" class="form-control col-md-7 col-xs-12 " data-parsley-id="1360"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
                       </div>
                     </div> <!-- No.Agenda -->
                       
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no-agenda">Tanggal Surat <span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12 " data-parsley-id="1360"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
-                      </div>
+                      <div class="form-group has-feedback col-sm-3">  
+                        <input type="date" name="tanggal" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu" for="tanggal"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                          <div class="help-block with-errors"></div>
+                    </div>
                     </div> <!-- Tanggal Surat -->  
                       
                      <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no-agenda">Nomor Surat <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12 " data-parsley-id="1360"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                        <input type="text" name="nomer"  required="required" class="form-control col-md-7 col-xs-12 " data-parsley-id="1360"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
                       </div>
                     </div> <!-- Nomor Surat --> 
                       
-                      <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no-agenda">Lampiran <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12 " data-parsley-id="1360"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
-                      </div>
-                    </div> <!-- Lampiran --> 
+                     
                       
                       <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no-agenda">Kode <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12 " data-parsley-id="1360"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                        <input type="text" name="kode" required="required" class="form-control col-md-7 col-xs-12 " data-parsley-id="1360"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
                       </div>
                     </div> <!-- Kode --> 
                       
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Keterangan <span class="required"></span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">KETERANGAN SURAT <span class="required"></span>
                       </label>
                       
                     </div>
-                    <div class="form-group">
-                      <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Kepada </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" data-parsley-id="9847"><ul class="parsley-errors-list" id="parsley-id-9847"></ul>
-                      </div>
-                    </div>
+                   
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Diteruskan kepada</label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        
-                          <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="checkbox" name="vehicle" value="WADEK 1"> WADEK 1&nbsp;
-                          </label
-                            
-                        
-                      </div>
-                            
-                        
-                          <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="checkbox" name="vehicle" value="WADEK 1"> WADEK 2&nbsp;
-                          </label
-                            
-                       
-                      </div>
-                                
-                                
-                          <label class="btn btn-default parsley-success" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="checkbox" name="vehicle" value="WADEK 1"> WADEK 3&nbsp;
-                          </label
-                            
-                        
-                      </div>
-                              </div></div>
+                      <div class="col-md-6 col-sm-6 col-xs-12 ">
+                        <select class="form-control" name="diteruskan">
+                          
+                          <option>-Tidak Diteruskan-</option>
+                          <option>Wadek 1</option>
+                          <option>Wadek 2</option>
+                          <option>Wadek 3</option>
+                        </select>
+                        </div></div>
                             
                              <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Sifat Pengelolaan
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12 ">
-                        <select class="form-control">
+                        <select class="form-control" name="sifat">
                           <option>Penting</option>
                           <option>Rahasia</option>
                           <option>Segera</option>
@@ -262,7 +233,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12 ">
-                        <select class="form-control">
+                        <select class="form-control" name="keterangan">
                           <option>Mohon Pendapat</option>
                           <option>Mohon Keputusan</option>
                           <option>Mohon Petunjuk</option>
@@ -276,23 +247,44 @@
                           <option>Edaran</option>
                         </select>       </div>
                     </div>            
-                       <div class="form-group">
-                      <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">File Upload </label>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Komentar</label>
+                        <div class ="col-md-6 col-sm-6 col-xs-12 "><textarea class="form-control col-md-6 col-sm-6 col-xs-12" rows="5" name="comment"></textarea></div>
+  
+</div>
+                              
+                       <div class="form-group">                        
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <FORM method="post" enctype='multipart/form-data'><input type="file" name="upload-file"><input type="submit" name="btnUpload" value="Upload">
-</FORM>         
+                        
                     <div class="ln_solid"></div>
                     <div class="form-group">
-                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-success">Submit</button>
-                      </div>
+                      <input type="submit" class='btn btn-success' name="submit" value="Simpan">
                     </div>
+<?php 
+    if (isset($_POST['submit'])){
+        include ('koneksi.php'); 
+        echo 'db sampe sini';
+        $agenda=$_POST['agenda']; 
+        $tanggal=$_POST['tanggal']; 
+        $kode=$_POST['kode']; 
+        $diteruskan=$_POST['diteruskan'];
+        $sifat=$_POST['sifat'];
+        $isi=$_POST['comment'];
+        $keterangan=$_POST['keterangan'];
+        $nomer=$_POST['nomer'];
+    
+        $input    ="INSERT INTO lembar_disposisi (No_Agenda, Tanggal_Surat, Kode, Diteruskan, Sifat_Pengelolaan, Isi_Disposisi, Keterangan, No_Surat)
+            VALUES ('$agenda','$tanggal','$kode','$diteruskan','$sifat','$isi','$keterangan','$nomer')";
+    mysql_query($input);}
+?>
 
                   </form>
+                           
                 </div>
               </div>
-            </div>
+								</div>
+							</div>
+             
 
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								...
