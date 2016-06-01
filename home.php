@@ -1,11 +1,7 @@
-
 <!DOCTYPE html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>AGENDA</title>
+<html lang="en">
 
 <head>
-
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Meta, title, CSS, favicons, etc. -->
 	<meta charset="utf-8">
@@ -13,9 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>E.Office | </title>
-	<?php 
-     include ("koneksi.php");
-    ?>
+     <?php   include("koneksi.php"); ?>
 
 	<!-- Bootstrap core CSS -->
 
@@ -36,13 +30,13 @@
 	<!--[if lt IE 9]>
 	<script src="../assets/js/ie8-responsive-file-warning.js"></script>
 	<![endif]-->
-	
+
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	<?php 
+    <?php  
     $Pengguna=$_GET['pengguna'];
     $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
     $hasil=mysql_query ($query);
@@ -51,14 +45,21 @@
         }else{
         while ($data = mysql_fetch_array ($hasil)){
         $jumlahKotakMasuk=$data[0];}}
-		
     ?>
 
-   
-
 </head>
+    
 
 <body class="nav-md">
+    
+    <style>
+        .fixed-panel {
+          min-height: 10px;
+          max-height: 400px;
+          overflow-y: scroll;
+            overflow-x: hidden;
+        }
+    </style>
 
 	<div class="container body">
 		<div class="main_container">
@@ -77,7 +78,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2><?php  echo $Pengguna ?></h2>
+							<h2><?php   echo $Pengguna ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -90,26 +91,26 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="home.php?pengguna=<?php  echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
+								<li><a href="home.php?pengguna=<?php   echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="permintaanSurat.php?pengguna=<?php  echo $Pengguna ?>">Permintaan Surat</a>
+										<li><a href="permintaanSurat.php?pengguna=<?php   echo $Pengguna ?>">Permintaan Surat</a>
 										</li>
-										<li><a href="memo.php?pengguna=<?php  echo $Pengguna ?>">Buat Memo</a>
+										<li><a href="memo.php?pengguna=<?php   echo $Pengguna ?>">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakMasuk.php?pengguna=<?php  echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php  echo $jumlahKotakMasuk ?></span></a>
+                                        <li><a href="kotakMasuk.php?pengguna=<?php   echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php   echo $jumlahKotakMasuk ?></span></a>
 										</li>
-                                        <li><a href="kotakKeluar.php?pengguna=<?php  echo $Pengguna ?>">Kotak Keluar</a>
+                                        <li><a href="kotakKeluar.php?pengguna=<?php   echo $Pengguna ?>">Kotak Keluar</a>
 										</li>
                                         
 									</ul>
 								</li>
                                 <li><a><i class="fa fa-edit"></i> Agenda <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="checkAgenda.php?pengguna=<?php  echo $Pengguna ?>">Check Agenda</a>
+										<li><a href="checkAgenda.php?pengguna=<?php   echo $Pengguna ?>">Check Agenda</a>
 										</li>
-										<li><a href="tulisAgenda.php?pengguna=<?php  echo $Pengguna ?>">Tulis Acara</a>
+										<li><a href="tulisAgenda.php?pengguna=<?php   echo $Pengguna ?>">Tulis Acara</a>
 										</li>
 									</ul>
 								</li>
@@ -153,59 +154,139 @@
 
 
 			<!-- page content -->
-			
-			<div class="right_col" role="main">
+			<div class="right_col container-fluid" role="main">
 
 				<div class="row">
-                    <div class="center">AGENDA</div>
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="dashboard_graph">
-					 <h3>E-Office! <small> List Agenda</small>			
-                <div class="row">
-                    <div class="col-md-12">
- 
 
-<table width = "80%" border = "1" cellpadding="0" cellspacing="center" style="margin:100px auto">
-	<tr>
-		
-							<th>Nomor</th>
-                            <th>Nama Agenda</th>
-                            <th>Waktu</th>
-                            <th>Detail</th>
+							<div class="row x_title">
+								<div class="col-md-6">
+									<h3>E-Office! <small>Online Mail</small></h3>
+								</div>
+								<div class="col-md-6">
+
+								</div>
+							</div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                <h2><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                  Selamat Datang di Aplikasi E-0ffice</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <br>
+                    
+                    
+                    
+                    <div class="table">
+                    <div class="col-md-4">
+                    <div class="row x_title"> <h1>Berita</h1> </div>
+                        
+                        <div class="table fixed-panel">
+                            Ubah konten disini !
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="col-md-4">
+                    <div class="row x_title"> <h1>Event</h1> </div>
+                        
+                        <div class="table fixed-panel">
+                            <div class="row">
                             
-		
-	</tr>
-	<?php 
-	
-		$query = mysql_query ("select id_agenda,Nama,Tanggal from event");
-		$id=0;  
-	while ($data = mysql_fetch_array ($query)){  
- 	$id++; 
- 	echo "      
-        <tr>  
-        <td>".$id."</td>
-		<td>".$data[1]."</td>  
-        <td>".$data[2]."</td>     
-		<td><a href=\"View.php?id=".$id."\">"."Detail</a> "."
-        </tr>   
-        ";            
-		} 
-	?>
+                            
+                                
+<?php  
+        include ('koneksi.php');
+	   
+		$query = mysql_query ("select * from event");
+		while ($data =mysql_fetch_array ($query) ){
+		?>
+                                
+                                
+<div class="col-sm-12">
+    <h2><?php   echo '<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>  '.$data['Nama'] ?></h2>
+    <table class="table table-striped">
+        <tr>
+     <td>
+        <?php   echo $data['Lokasi'] ?>
+      </td>
+      <td>
+        <?php   echo $data['Tanggal'] ?>
+      </td>
+        <td>
+        <?php   echo $data['Pukul'] ?>
+      </td>
+        </tr>
+    </table>
+</div>
+    <!--    
+		<tr>
+            <td class="row row-md-12 ">
+			<tr>
+                
+            
+			<td class="success col col-md-4"></td>
+			<td class="warning col col-md-4"></td>
+            <td class="info col col-md-4"></td>
+            </tr>
+            </td>
+			
+		</tr>
+-->
+<?php  
 
-               </div></div>
+}
+?>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                    <div class="row x_title"> <h1>Notifikasi</h1></div>
+                        
+                        <div class="table fixed-panel">
+                            Ubah konten disini !
+                        </div>
+                    </div>
+                </div>
+                  
+                  
+
+
+                    
+           
+                </div>
+              </div>
+            </div>
+
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								...
 							</div>
 
-							<div class="clearfix">
-							
-							</div>
+							<div class="clearfix"></div>
 						</div>
 					</div>
 
 				</div>
-                
-                
 				<br />
 
+				<!-- footer content -->
+
+				<footer>
+					<div class="copyright-info">
+						<p class="pull-right">Website By: <a href="http://www.unair.ac.id">Universitas Airlangga production		</a>
+						</p>
+					</div>
+					<div class="clearfix"></div>
+				</footer>
+				<!-- /footer content -->
 			</div>
 			<!-- /page content -->
 
@@ -470,9 +551,6 @@
 	</script>
 	<!-- /datepicker -->
 	<!-- /footer content -->
-			<!-- /top navigation -->
-
-
 </body>
 
 </html>
