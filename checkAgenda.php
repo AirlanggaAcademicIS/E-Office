@@ -53,7 +53,20 @@
         $jumlahKotakMasuk=$data[0];}}
 		
     ?>
+     <?php 
+    $Pengguna=$_GET['pengguna'];
+    $query="Select Jabatan from pegawai where Nama_Pegawai = '".$Pengguna."'";
+    $hasil=mysql_query ($query);
+        if($hasil==false){
+        echo "DB SEDANG EROR";
+        }else {
+         while ($data = mysql_fetch_array ($hasil)){
+        $Jabatan=$data[0];}   
+        }
+		
+    ?>
 
+    
    
 
 </head>
@@ -96,8 +109,10 @@
 									<ul class="nav child_menu" style="display: none">
 										<li><a href="permintaanSurat.php?pengguna=<?php  echo $Pengguna ?>">Permintaan Surat</a>
 										</li>
-										<li><a href="memo.php?pengguna=<?php  echo $Pengguna ?>">Buat Memo</a>
-										</li>
+										<?php 
+        if ($Jabatan=="Kadep"){ ?>
+                                        <li><a href="memo.php?pengguna=<?php  echo $Pengguna ?>">Memo</a></li>
+                                        <?php } ?>
                                         <li><a href="kotakMasuk.php?pengguna=<?php  echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php  echo $jumlahKotakMasuk ?></span></a>
 										</li>
                                         <li><a href="kotakKeluar.php?pengguna=<?php  echo $Pengguna ?>">Kotak Keluar</a>
