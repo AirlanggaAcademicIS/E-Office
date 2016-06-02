@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>E-Office | Permintaan Surat</title>
-<?php
-include ("koneksi.php");
-?>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,10 +10,10 @@ include ("koneksi.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>E.Office | </title>
+    <?php   include ("koneksi.php"); ?>
 
 	<!-- Bootstrap core CSS -->
-
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 
 	<link href="fonts/css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/animate.min.css" rel="stylesheet">
@@ -28,10 +24,12 @@ include ("koneksi.php");
 	<link href="css/icheck/flat/green.css" rel="stylesheet" />
 	<link href="css/floatexamples.css" rel="stylesheet" type="text/css" />
 
-	<script src="js/jquery.min.js"></script>
-	<script src="js/nprogress.js"></script>
-    <script src="js/validator.js"></script>
+	<script src="js/jquery.ui.autocomplete.html.js" />
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<!--[if lt IE 9]>
 	<script src="../assets/js/ie8-responsive-file-warning.js"></script>
 	<![endif]-->
@@ -42,18 +40,60 @@ include ("koneksi.php");
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
+    
 </head>
 
 
 <body class="nav-md">
-
+<?php 
+    $Pengguna=$_GET['pengguna'];
+    $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
+    $hasil=mysql_query ($query);
+        if($hasil==false){
+        echo "DB SEDANG EROR";
+        }else{
+        while ($data = mysql_fetch_array ($hasil)){
+        $jumlahKotakMasuk=$data[0];}}
+    ?>
+    
+    <!-- untuk mencari nama pegawai pada text box Teruskan -->
+    <?php  
+            $query="Select Nama_Pegawai from pegawai";//Query select nama pegawai
+            $hasil=mysql_query($query);
+            if($hasil==false){
+                echo "tidak ada nama pegawai pada database";
+            }else{
+            $i=0;
+            while ($data = mysql_fetch_array ($hasil)){
+            $namaPegawai[$i]=$data[0];
+            $i++;
+            }}
+    ?>
+   
+    <!-- Jscript untuk tiap nama pegawai sebagai tujuan pada input teruskan-->
+<script>
+$(document).ready(function(){
+    var sumber = [];<?php   $i=0; ?>
+    var i=0;
+    var panjang=<?php   echo json_encode(count($namaPegawai)); ?>;
+  <?php   foreach($namaPegawai as $key => $val){ ?>  
+        sumber[i]=<?php   echo json_encode($val);?>;
+    i++;
+   <?php    } ?>
+$( "#Kepada" ).autocomplete({
+  source: sumber,
+    minLength: 1
+});
+});
+</script>
+    <!-- /Jscript untuk tiap nama pegawai sebagai tujuan pada input teruskan-->
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="index.php" class="site_title"><i class="fa fa-paw"></i> <span>Woffice!</span></a>
+						<a href="home.php?pengguna=<?php   echo $Pengguna ?>" class="site_title"><i class="fa fa-paw"></i> <span>Woffice!</span></a>
 					</div>
 					<div class="clearfix"></div>
 
@@ -64,7 +104,7 @@ include ("koneksi.php");
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2>Nama Pengguna</h2>
+							<h2><?php   echo $Pengguna; ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -72,31 +112,31 @@ include ("koneksi.php");
 					<br />
 
 					<!-- sidebar menu -->
-						<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="index.php"><i class="fa fa-home"></i> Home </a>
+								<li><a href="home.php?pengguna=<?php   echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="permintaanSurat.php">Permintaan Surat</a>
+										<li><a href="permintaanSurat.php?pengguna=<?php   echo $Pengguna ?>">Permintaan Surat</a>
 										</li>
-										<li><a href="memo.php">Buat Memo</a>
+										<li><a href="memo.php?pengguna=<?php   echo $Pengguna ?>">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakMasuk.php">Kotak Masuk  <span class="badge">0</span></a>
+                                        <li><a href="kotakMasuk.php?pengguna=<?php   echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php   echo $jumlahKotakMasuk ?></span></a>
 										</li>
-                                        <li><a href="kotakKeluar.php">Kotak Keluar  <span class="badge">0</span></a>
+                                        <li><a href="kotakKeluar.php?pengguna=<?php   echo $Pengguna ?>">Kotak Keluar</a>
 										</li>
                                         
 									</ul>
 								</li>
                                 <li><a><i class="fa fa-edit"></i> Agenda <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="checkAgenda.php">Check Agenda</a>
+										<li><a href="checkAgenda.php?pengguna=<?php   echo $Pengguna ?>">Check Agenda</a>
 										</li>
-										<li><a href="tulisAgenda.php">Tulis Acara</a>
+										<li><a href="tulisAgenda.php?pengguna=<?php   echo $Pengguna ?>">Tulis Acara</a>
 										</li>
 									</ul>
 								</li>
@@ -140,8 +180,7 @@ include ("koneksi.php");
 
 
 			<!-- page content -->
-			
-            <!-- Modal -->
+			 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -190,7 +229,7 @@ include ("koneksi.php");
                     
           
                   
-                  <form data-toggle="validator" role="form" method="post" id="demo-form2" class="form-horizontal form-label-left"  >
+                    <form class="form-horizontal" data-toggle="validator" role="form" method="post" enctype="multipart/form-data" >
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Data Permintaan <span class="required"></span>
@@ -198,10 +237,10 @@ include ("koneksi.php");
                       
                     </div>
                     <div class="form-group has-feedback">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="judul">Judul 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="JudulPesan">Judul 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="judul" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Isi data judul" name='judul' >
+                        <input type="text" id="JudulPesan" name="JudulPesan" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Isi data judul" >
                       
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         
@@ -210,19 +249,26 @@ include ("koneksi.php");
                       </div>
                     </div> <!-- Judul -->
                       
+                    <div class="form-group"> 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="Kepada">Kepada: 
+                      </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="Kepada" placeholder="Masukan Penerima" name="Kepada">
+                        </div>
+                    </div>
                       
                     <div class="form-group row has-feedback">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tanggal">tanggal 
                       </label>
                         
                     <div class="form-group has-feedback col-sm-3">  
-                        <input type="date" name="tanggal" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                        <input type="date" id="Tanggal" name="Tanggal" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu" ><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                           <div class="help-block with-errors"></div>
                     </div>
                        
                     <div class="form-group has-feedback col-sm-3">
-                        <input type="time" name="waktu" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
+                        <input type="time" id="Waktu" name="Waktu" required class="form-control col-xs-7 col-xs-12 " data-parsley-id="1360" data-error="Lengkapi keterangan waktu"><ul class="parsley-errors-list filled" id="parsley-id-1360"></ul>
                               <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div class="help-block with-errors"></div>
                     </div>
@@ -236,47 +282,104 @@ include ("koneksi.php");
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12 ">
-                        <textarea class="form-control" rows="3" placeholder="Isi Keterangan Even" for="keterangan" name="keterangan"></textarea>       </div>
+                       <textarea class="form-control" id="Keterangan" placeholder="Masukan Pesan" row="10" name="Keterangan"></textarea>
+                        </div>
                     </div><!--keterangan even-->
                                 
-                       <div class="form-group row has-feedback">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Select File</label>
- <div class="col-md-6 col-sm-6 col-xs-12 ">
- <input id="input-1" type="file" class="file">
-                                </div> </div>
+                       <div class="form-group">                                                      
+                                                      <div class="col-md-12">
+                                                        <label for="fileSelect">Filename:</label>
+                                                        <input type="file" name="photo" id="fileSelect"><br>
+                                                      </div>
+                                                  </div>
                                 
                                 
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        
-                        <button type="submit" class="btn btn-success" name = 'submit' value='Simpan'>Send</button>
+                        <button type="submit" class="btn btn-success" name="submit">Send</button>
                       </div>
                     </div>
 
                   </form>
-<?php 
-if (isset($_POST['submit'])){
-include ('koneksi.php'); 
-    echo 'db sampe sini';
-//$ = int (java)
-$Judul_Pesan=$_POST['judul']; 
-$Tanggal=$_POST['tanggal'];
-$Waktu=$_POST['waktu'];
-$Keterangan=$_POST['keterangan'];
-    
-$input    ="INSERT INTO pesan (judul, tanggal, waktu, keterangan)
-            VALUES ('$Judul_Pesan','$Tanggal','$Waktu','$Keterangan')";
-    mysql_query($input);}
-?>
+                   <!-- jika tombol kirim di tekan -->
+                            <?php  
+                            // cek upload file 
+                            $adaFile=false;
+                            $namaFile="tidak ada";
+                            if(isset($_FILES["photo"]["name"])){
+                            if($_FILES["photo"]["error"] > 0){
+                            echo "Error: " . $_FILES["photo"]["error"] . "<br>";
+                            } else{
+                            $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png", "doc" => "application/msword", "docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "pdf" => "application/pdf");
+                            $filename = $_FILES["photo"]["name"];
+                            $filetype = $_FILES["photo"]["type"];
+                            $filesize = $_FILES["photo"]["size"];
+                            // Verify file extension
+                            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                            if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
+                            // Verify file size - 5MB maximum
+                            $maxsize = 5 * 1024 * 1024;
+                            if($filesize > $maxsize) die("Error: File size is larger than the allowed limit.");
+                            // Verify MYME type of the file
+                            if(in_array($filetype, $allowed)){
+                                // Check whether file exists before uploading it
+                                /*
+                                if(file_exists("upload/" . $_FILES["photo"]["name"])){
+                                    $pesanAlert="FILE".$_FILES["photo"]["name"]. "sudah ter upload";
+                                    echo "<script type='text/javascript'>alert('$pesanAlert');</script>";
+                                } else{
+                                    $adaFile=true;
+                                    $pesanAlert="FILE".$_FILES["photo"]["name"]. "sudah ter upload";
+                                    echo "<script type='text/javascript'>alert('$pesanAlert');</script>";
+                                } 
+                            } else{
+                                echo "Error: There was a problem uploading your file - please try again."; 
+                            }}}    */
+                                $adaFile=true;}
+                            }}
+                    
+                                    //kirim isi pesan teruskan
+                                    if (isset($_REQUEST['submit'])){
+                                    //cek apakah ada file
+                                    if($adaFile==true){
+                                    $root=getcwd();
+                                    move_uploaded_file($_FILES["photo"]["tmp_name"], $root."/upload/".$_FILES["photo"]["name"]);
+                                    $namaFile=$_FILES["photo"]["name"];
+                                    
+                                    }
+                                                //memulai proses membalas, identifikasi penerima pengirim dan isi pesan=keteranganBalas
+                                                
+                                                  $Pengirim=$Pengguna;
+                                                  $calonPenerima=$_REQUEST['Kepada'];
+                                                  $calonPenerimaStatus=false;
+                                        $JudulPesan=$_REQUEST['JudulPesan'];
+                                        $Tanggal=$_REQUEST['Tanggal'];
+                                        $Waktu=$_REQUEST['Waktu'];
+                                        $Keterangan=$_REQUEST['Keterangan'];
+                                        //cek apakah penerima balas ada di list pegawai
+                                        foreach($namaPegawai as $key => $val){
+                                               if($calonPenerima==$val){
+                                                $calonPenerimaStatus=true;
+                                                $Penerima=$_REQUEST['Kepada'];
+                                                  $TanggalSekarang=date("Y-m-d");
+                                                  $query ="INSERT INTO pesan (No_Pesan,Judul_Pesan,Tanggal,Waktu,Keterangan,File,Pengirim,Penerima,Tanggal_kirim,Status_pengirim,Status_penerima) VALUES ('null','$JudulPesan','$Tanggal','$Waktu','$Keterangan','$namaFile','$Pengirim','$Penerima','$TanggalSekarang','0','0')";
+                                                  mysql_query ($query);
+                                            }
+                                        }
+                                        if($calonPenerimaStatus==false){
+                                            //jika penerima balas!= nama pegawai yang ada
+                                            echo '<script type=text/javascript> alert("Tujuan pesan tidak ditemukan, silahkan masukan ulang"); </script>';
+                                        }
+                                                  
+                                              }
+                                                  //tutup kirim pesan
+                                              ?>  
+                                        <!-- /jika tombol kirim teruskan di tekan -->  
            
                 </div>
               </div>
             </div>
-
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								...
-							</div>
 
 							<div class="clearfix"></div>
 						</div>
