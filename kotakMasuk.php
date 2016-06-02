@@ -60,23 +60,9 @@
         $countSurat=0;
      
     ?>
-     <?php 
-    $Pengguna=$_GET['pengguna'];
-    $query="Select Jabatan from pegawai where Nama_Pegawai = '".$Pengguna."'";
-    $hasil=mysql_query ($query);
-        if($hasil==false){
-        echo "DB SEDANG EROR";
-        }else {
-         while ($data = mysql_fetch_array ($hasil)){
-        $Jabatan=$data[0];}   
-        }
-		
-    ?>
-
     
-   
-
 </head>
+
 
 <body class="nav-md">
 
@@ -86,7 +72,7 @@
 				<div class="left_col scroll-view">
 
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="home.php" class="site_title"><i class="fa fa-paw"></i> <span>Woffice!</span></a>
+						<a href="index.php" class="site_title"><i class="fa fa-paw"></i> <span>Woffice!</span></a>
 					</div>
 					<div class="clearfix"></div>
 
@@ -97,7 +83,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2><?php  echo $Pengguna ?></h2>
+							<h2><?php  echo $Pengguna; ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -110,16 +96,14 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="home.php?pengguna=<?php  echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
+								<li><a href="index.php?pengguna=<?php  echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="permintaanSurat.php?pengguna=<?php  echo $Pengguna ?>">Permintaan Surat</a>
+										<li><a href="permintaanSurat.php">Permintaan Surat</a>
 										</li>
-										<?php 
-        if ($Jabatan=="Kadep"){ ?>
-                                        <li><a href="memo.php?pengguna=<?php  echo $Pengguna ?>">Memo</a></li>
-                                        <?php } ?>
+										<li><a href="memo.php">Buat Memo</a>
+										</li>
                                         <li><a href="kotakMasuk.php?pengguna=<?php  echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php  echo $jumlahKotakMasuk ?></span></a>
 										</li>
                                         <li><a href="kotakKeluar.php?pengguna=<?php  echo $Pengguna ?>">Kotak Keluar</a>
@@ -129,9 +113,9 @@
 								</li>
                                 <li><a><i class="fa fa-edit"></i> Agenda <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="checkAgenda.php?pengguna=<?php  echo $Pengguna ?>">Check Agenda</a>
+										<li><a href="checkAgenda.php">Check Agenda</a>
 										</li>
-										<li><a href="tulisAgenda.php?pengguna=<?php  echo $Pengguna ?>">Tulis Acara</a>
+										<li><a href="tulisAgenda.php">Tulis Acara</a>
 										</li>
 									</ul>
 								</li>
@@ -139,7 +123,6 @@
 						</div>
 					</div>
 					<!-- /sidebar menu -->
-
 
 					<!-- /menu footer buttons -->
 					<div class="sidebar-footer hidden-small">

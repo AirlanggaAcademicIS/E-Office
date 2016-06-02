@@ -35,34 +35,9 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	<?php 
-    $Pengguna=$_GET['pengguna'];
-    $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
-    $hasil=mysql_query ($query);
-        if($hasil==false){
-        echo "DB SEDANG EROR";
-        }else{
-        while ($data = mysql_fetch_array ($hasil)){
-        $jumlahKotakMasuk=$data[0];}}
-		
-    ?>
-    <?php 
-    $Pengguna=$_GET['pengguna'];
-    $query="Select Jabatan from pegawai where Nama_Pegawai = '".$Pengguna."'";
-    $hasil=mysql_query ($query);
-        if($hasil==false){
-        echo "DB SEDANG EROR";
-        }else {
-         while ($data = mysql_fetch_array ($hasil)){
-        $Jabatan=$data[0];}   
-        }
-		
-    ?>
-
-    
-   
 
 </head>
+
 
 <body class="nav-md">
 
@@ -72,7 +47,7 @@
 				<div class="left_col scroll-view">
 
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="home.php" class="site_title"><i class="fa fa-paw"></i> <span>Woffice!</span></a>
+						<a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>E.Office!</span></a>
 					</div>
 					<div class="clearfix"></div>
 
@@ -83,7 +58,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2><?php  echo $Pengguna ?></h2>
+							<h2>nama pengguna</h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -91,41 +66,35 @@
 					<br />
 
 					<!-- sidebar menu -->
-					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+				<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="home.php?pengguna=<?php  echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
+								<li><a href="index.html"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="permintaanSurat.php?pengguna=<?php  echo $Pengguna ?>">Permintaan Surat</a>
+										<li><a href="permintaanSurat.html">Permintaan Surat</a>
 										</li>
-										<?php 
-        if ($Jabatan=="Kadep"){ ?>
-                                        <li><a href="memo.php?pengguna=<?php  echo $Pengguna ?>">Memo</a></li>
-                                        <?php } ?>
-                                        <li><a href="kotakMasuk.php?pengguna=<?php  echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php  echo $jumlahKotakMasuk ?></span></a>
+										<li><a href="memo.html">Buat Memo</a>
 										</li>
-                                        <li><a href="kotakKeluar.php?pengguna=<?php  echo $Pengguna ?>">Kotak Keluar</a>
+                                        <li><a href="kotakSurat.html">Kotak Surat</a>
 										</li>
                                         
 									</ul>
 								</li>
                                 <li><a><i class="fa fa-edit"></i> Agenda <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="checkAgenda.php?pengguna=<?php  echo $Pengguna ?>">Check Agenda</a>
+										<li><a href="checkAgenda.html">Check Agenda</a>
 										</li>
-										<li><a href="tulisAgenda.php?pengguna=<?php  echo $Pengguna ?>">Tulis Acara</a>
+										<li><a href="tulisAgenda.html">Tulus Agenda</a>
 										</li>
 									</ul>
 								</li>
 							</ul>
 						</div>
 					</div>
-					<!-- /sidebar menu -->
-
 					<!-- /sidebar menu -->
 
 					<!-- /menu footer buttons -->
@@ -307,8 +276,6 @@
         $input    ="INSERT INTO lembar_disposisi (No_Agenda, Tanggal_Surat, Kode, Diteruskan, Sifat_Pengelolaan, Isi_Disposisi, Keterangan, No_Surat)
             VALUES ('$agenda','$tanggal','$kode','$diteruskan','$sifat','$isi','$keterangan','$nomer')";
     mysql_query($input);}
-
-    
 ?>
 
                   </form>

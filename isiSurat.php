@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Meta, title, CSS, favicons, etc. -->
@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>E.Office | </title>
-    <?php   include ("koneksi.php"); ?>
+    <?php  include ("koneksi.php"); ?>
 	<!-- Bootstrap core CSS -->
 
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -66,14 +66,14 @@ $(document).ready(function(){
 <body class="nav-md">
  <!--persiapan data PHP-->
     
-    <?php  
+    <?php 
     $Pengguna=$_GET['pengguna'];
     $judulPesan=$_GET['judulpesan'];
     
     
     ?>
     <!-- untuk menghitung kotak masuk yang belum terbaca -->
-    <?php  
+    <?php 
     $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
     $hasil=mysql_query ($query);
         if($hasil==false){
@@ -86,7 +86,7 @@ $(document).ready(function(){
     
     
     <!-- untuk mencari nama pegawai pada text box Teruskan -->
-    <?php  
+    <?php 
             $query="Select Nama_Pegawai from pegawai";//Query select nama pegawai
             $hasil=mysql_query($query);
             if($hasil==false){
@@ -102,16 +102,16 @@ $(document).ready(function(){
     <!-- Jscript untuk tiap nama pegawai sebagai tujuan pada input teruskan-->
 <script>
 $(document).ready(function(){
-    var sumber = [];<?php   $i=0; ?>
+    var sumber = [];<?php  $i=0; ?>
     var i=0;
-    var panjang=<?php   echo json_encode(count($namaPegawai)); ?>;
-  <?php   foreach($namaPegawai as $key => $val){ ?>  
-        sumber[i]=<?php   echo json_encode($val);?>;
+    var panjang=<?php  echo json_encode(count($namaPegawai)); ?>;
+  <?php  foreach($namaPegawai as $key => $val){ ?>  
+        sumber[i]=<?php  echo json_encode($val);?>;
     i++;
-   <?php    } ?>
+   <?php   } ?>
 $( "#teruskanKepada" ).autocomplete({
   source: sumber,
-    minLength: 1
+    minLength: 2
 });
 });
 </script>
@@ -119,7 +119,7 @@ $( "#teruskanKepada" ).autocomplete({
     
     
     <!--untuk menlist banyak surat -->
-    <?php  
+    <?php 
     
         $query="Select * from pesan where Judul_Pesan='".$judulPesan."'"; //Query select seluruhnya dari judul surat
         $hasil=mysql_query ($query);
@@ -135,33 +135,14 @@ $( "#teruskanKepada" ).autocomplete({
     <!-- setelah php di atas, jangan menutup atau membuat php baru karna else di atas belum ada tutupan -->
     
     
-     <?php 
-    $Pengguna=$_GET['pengguna'];
-    $query="Select Jabatan from pegawai where Nama_Pegawai = '".$Pengguna."'";
-    $hasil=mysql_query ($query);
-        if($hasil==false){
-        echo "DB SEDANG EROR";
-        }else {
-         while ($data = mysql_fetch_array ($hasil)){
-        $Jabatan=$data[0];}   
-        }
-		
-    ?>
-
     
-   
-
-</head>
-
-<body class="nav-md">
-
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="home.php" class="site_title"><i class="fa fa-paw"></i> <span>Woffice!</span></a>
+						<a href="index.php" class="site_title"><i class="fa fa-paw"></i> <span>Woffice!</span></a>
 					</div>
 					<div class="clearfix"></div>
 
@@ -172,7 +153,7 @@ $( "#teruskanKepada" ).autocomplete({
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2><?php  echo $Pengguna ?></h2>
+							<h2><?php  echo $Pengguna; ?></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -185,16 +166,14 @@ $( "#teruskanKepada" ).autocomplete({
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="home.php?pengguna=<?php  echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
+								<li><a href="index.php?pengguna=<?php  echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="permintaanSurat.php?pengguna=<?php  echo $Pengguna ?>">Permintaan Surat</a>
+										<li><a href="permintaanSurat.php">Permintaan Surat</a>
 										</li>
-										<?php 
-        if ($Jabatan=="Kadep"){ ?>
-                                        <li><a href="memo.php?pengguna=<?php  echo $Pengguna ?>">Memo</a></li>
-                                        <?php } ?>
+										<li><a href="memo.php">Buat Memo</a>
+										</li>
                                         <li><a href="kotakMasuk.php?pengguna=<?php  echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php  echo $jumlahKotakMasuk ?></span></a>
 										</li>
                                         <li><a href="kotakKeluar.php?pengguna=<?php  echo $Pengguna ?>">Kotak Keluar</a>
@@ -204,18 +183,18 @@ $( "#teruskanKepada" ).autocomplete({
 								</li>
                                 <li><a><i class="fa fa-edit"></i> Agenda <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="checkAgenda.php?pengguna=<?php  echo $Pengguna ?>">Check Agenda</a>
+										<li><a href="checkAgenda.php">Check Agenda</a>
 										</li>
-										<li><a href="tulisAgenda.php?pengguna=<?php  echo $Pengguna ?>">Tulis Acara</a>
+										<li><a href="tulisAgenda.php">Tulis Acara</a>
 										</li>
 									</ul>
 								</li>
 							</ul>
 						</div>
 					</div>
-					<!-- /sidebar menu -->
-
-
+                    
+					
+                    <!-- /sidebar menu -->
 
 					<!-- /menu footer buttons -->
 					<div class="sidebar-footer hidden-small">
@@ -258,7 +237,7 @@ $( "#teruskanKepada" ).autocomplete({
                     <!--badan-->
                         <div class="col-md-12 col-sm-12 col-xs-12">
                         <!-- looping listsurat-->
-                        <?php   while ($data = mysql_fetch_array ($hasil)){
+                        <?php  while ($data = mysql_fetch_array ($hasil)){
         
                         $NoPesan[$countSurat]=$data[0];
                         $JudulPesan[$countSurat]=$data[1];
@@ -285,7 +264,7 @@ $( "#teruskanKepada" ).autocomplete({
                             <div class="x_panel">
                                 <ul class="nav navbar-right panel_toolbox">                   
                                     <li>
-                                        <a class="collapse-link"><?php   echo"$JudulPesan[$countSurat]"; ?><i class="fa fa-chevron-up"></i></a>                    
+                                        <a class="collapse-link"><?php  echo"$JudulPesan[$countSurat]"; ?><i class="fa fa-chevron-up"></i></a>                    
                                     </li>                  
                                 </ul>                                
                                 <div class="x_content">
@@ -294,11 +273,11 @@ $( "#teruskanKepada" ).autocomplete({
                                             <img src="images/user.png" class="img-rounded" alt="nama pengguna" width=50px height=50px>                                
                                         </div>                                
                                         <div class="col-md-11">                                
-                                            <h4><strong><?php   echo"Judul Pesan: $JudulPesan[$countSurat]"; ?> <small> (<?php   echo"$TanggalKirim[$countSurat]"; ?>)</small></strong></h4>                                
+                                            <h4><strong><?php  echo"Judul Pesan: $JudulPesan[$countSurat]"; ?> <small> (<?php  echo"$TanggalKirim[$countSurat]"; ?>)</small></strong></h4>                                
                                             <h4><strong>
-                                                <?php   echo"Untuk: $Penerima[$countSurat]";?>
-                                                <?php   echo "<br>"; ?>
-                                                <?php   echo"Dari: $Pengirim[$countSurat]"; ?>
+                                                <?php  echo"Untuk: $Penerima[$countSurat]";?>
+                                                <?php  echo "<br>"; ?>
+                                                <?php  echo"Dari: $Pengirim[$countSurat]"; ?>
                                                 </strong></h4>                                
                                         </div>                            
                                     </div>                            
@@ -308,7 +287,7 @@ $( "#teruskanKepada" ).autocomplete({
                                                 <!--<div class="well well-sm">-->                                            
                                                     <h4>                                                
                                                         <p>
-                                                            <?php   echo "$Keterangan[$countSurat]"?>
+                                                            <?php  echo "$Keterangan[$countSurat]"?>
                                                             <br>
                                                         </p>                                            
                                                     </h4>                                        
@@ -317,21 +296,21 @@ $( "#teruskanKepada" ).autocomplete({
                                         </div>                           
                                     </div>
                                 <div class="pull-left"> 
-                                <?php   if($NamaFile[$countSurat]!="tidak ada"){ ?> 
-                                <form method="post" action="upload/<?php   echo $NamaFile[$countSurat] ?>" target="_blank">
+                                <?php  if($NamaFile[$countSurat]!="tidak ada"){ ?> 
+                                <form method="post" action="upload/<?php  echo $NamaFile[$countSurat] ?>" target="_blank">
                                 <button type="submit" class="btn btn-warning" >LIHAT FILE</button>
                                 </form>
-                                <?php   } ?>    
+                                <?php  } ?>    
                                 </div>
                                 </div>                                
                             </div>
                             
 							
 						</div>
-                   <?php    
+                   <?php   
                     ?>
                             </div>
-                            <?php   $countSurat++;}} ?> <!--php closing id listsurat-->
+                            <?php  $countSurat++;}} ?> <!--php closing id listsurat-->
                             
                 <!-- JScript looping isi surat-->
                 <script> 
@@ -361,9 +340,9 @@ $( "#teruskanKepada" ).autocomplete({
                                 <div id="balas" class="panel-collapse collapse">
                                           <div class="x_panel">   
                                               <!-- form balas -->
-                                              <form class="form-horizontal" data-toggle="validator" role="form" method="post" enctype="multipart/form-data" >
-                                                <h4><strong><?php   echo"Judul: $JudulPesan[0]"; ?><small></small></strong></h4>                
-                                                  <?php   $countSurat--; 
+                                              <form class="form-horizontal" data-toggle="validator" role="form" method="post" enctype="multipart/form-data">
+                                                <h4><strong><?php  echo"Judul: $JudulPesan[0]"; ?><small></small></strong></h4>                
+                                                  <?php  $countSurat--; 
                                                       $penerimaSuratNomer=$countSurat;//penerimaSuratNomer= array untuk penerima surat bukan dirinya sendiri
                                                       while($Pengirim[$penerimaSuratNomer]==$Pengguna && $penerimaSuratNomer!=0){$penerimaSuratNomer--;
                                                      //mencari pengirim balasan
@@ -375,7 +354,7 @@ $( "#teruskanKepada" ).autocomplete({
                                                        $PenerimaBalas=$Pengirim[$penerimaSuratNomer]; 
                                                     }
                                                        ?>
-                                                  <h4><strong><?php   echo"Kepada : $PenerimaBalas "; ?></strong></h4>
+                                                  <h4><strong><?php  echo"Kepada : $PenerimaBalas "; ?></strong></h4>
                                                   
                                                   
                                                   
@@ -409,7 +388,7 @@ $( "#teruskanKepada" ).autocomplete({
                                                   </form>
                                                   
                                         <!-- jika tombol kirim di tekan -->
-                            <?php  
+                            <?php 
                             // cek upload file 
                             $adaFile=false;
                             $namaFile="tidak ada";
@@ -476,7 +455,7 @@ $( "#teruskanKepada" ).autocomplete({
                                           <div class="x_panel">   
                                               <!-- form teruskan -->
                                               <form class="form-horizontal" data-toggle="validator" role="form" method="post" enctype="multipart/form-data">
-                                                <h4><strong><?php   echo "Judul: $JudulPesan[0]"; ?></strong></h4>                
+                                                <h4><strong><?php  echo "Judul: $JudulPesan[0]"; ?></strong></h4>                
                                                   <div class="form-group">                                                      
                                                       <div class="col-md-12">
                                                           <label for="teruskanKepada"><strong>TERUSKAN KEPADA:</strong></label>
@@ -513,7 +492,7 @@ $( "#teruskanKepada" ).autocomplete({
                                                   </form>
                                                   
                                         <!-- jika tombol kirim di tekan -->
-                            <?php  
+                            <?php 
                             // cek upload file 
                             $adaFile=false;
                             $namaFile="tidak ada";
