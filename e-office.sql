@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.2.11
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 31, 2016 at 09:20 AM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.21
+-- Host: 127.0.0.1
+-- Generation Time: Jun 02, 2016 at 06:10 AM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `e-office`
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `berita`
 --
 
-CREATE TABLE `berita` (
+CREATE TABLE IF NOT EXISTS `berita` (
   `Nomor_Berita` varchar(50) NOT NULL,
   `Judul_Berita` varchar(50) NOT NULL,
   `Isi_Berita` varchar(50) NOT NULL,
@@ -40,15 +40,15 @@ CREATE TABLE `berita` (
 -- Table structure for table `event`
 --
 
-CREATE TABLE `event` (
-  `id_agenda` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `event` (
+`id_agenda` int(10) NOT NULL,
   `Nama` varchar(45) DEFAULT NULL,
   `Kategori` varchar(45) DEFAULT NULL,
   `Lokasi` varchar(45) DEFAULT NULL,
   `Tanggal` date DEFAULT NULL,
   `Pukul` time DEFAULT NULL,
   `Keterangan` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `event`
@@ -73,16 +73,31 @@ INSERT INTO `event` (`id_agenda`, `Nama`, `Kategori`, `Lokasi`, `Tanggal`, `Puku
 -- Table structure for table `lembar_disposisi`
 --
 
-CREATE TABLE `lembar_disposisi` (
+CREATE TABLE IF NOT EXISTS `lembar_disposisi` (
   `No_Agenda` int(11) NOT NULL,
   `Tanggal_Surat` date NOT NULL,
   `Kode` varchar(12) NOT NULL,
-  `Perihal` varchar(30) NOT NULL,
-  `Sifat_Pengelolaan` int(11) NOT NULL,
-  `Isi_Disposisi` varchar(1000) NOT NULL,
-  `Keterangan` varchar(1000) NOT NULL,
-  `No_Pesan` int(11) NOT NULL
+  `Diteruskan` varchar(30) NOT NULL,
+  `Sifat_Pengelolaan` varchar(20) NOT NULL,
+  `Isi_Disposisi` varchar(512) NOT NULL,
+  `Keterangan` varchar(20) NOT NULL,
+  `No_Surat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `lembar_disposisi`
+--
+
+INSERT INTO `lembar_disposisi` (`No_Agenda`, `Tanggal_Surat`, `Kode`, `Diteruskan`, `Sifat_Pengelolaan`, `Isi_Disposisi`, `Keterangan`, `No_Surat`) VALUES
+(1, '0001-01-01', '1', 'Wadek 3', 'Segera', '1', 'Mohon Keputusan', 1),
+(101, '1011-01-11', '101', '-Tidak Diteruskan-', 'Penting', '10101021', 'Mohon Pendapat', 101),
+(0, '1992-11-12', '119', '-Tidak Diteruskan-', 'Penting', 'test totet', 'Mohon Pendapat', 119),
+(8, '1111-02-11', '2', '-Tidak Diteruskan-', 'Penting', '2', 'Mohon Pendapat', 12),
+(131, '2006-11-21', '761', 'Wadek 1', 'Penting', 'tolong ini cuman tester', 'Mohon Pendapat', 1),
+(12, '2010-01-02', 'asd', 'Wadek 1', 'Rahasia', 'aaa', 'Edaran', 1),
+(1, '0112-11-11', 'asdasd', '-Tidak Diteruskan-', 'Penting', '444', 'Mohon Pendapat', 0),
+(1, '0111-11-11', 'coba', '-Tidak Diteruskan-', 'Penting', '11', 'Mohon Pendapat', 0),
+(111, '0001-11-02', 'hahahaha', '-Tidak Diteruskan-', 'Penting', 'dimas', 'Mohon Pendapat', 21231);
 
 -- --------------------------------------------------------
 
@@ -90,8 +105,8 @@ CREATE TABLE `lembar_disposisi` (
 -- Table structure for table `pegawai`
 --
 
-CREATE TABLE `pegawai` (
-  `Nip` int(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pegawai` (
+  `Nip` varchar(20) NOT NULL,
   `Password` varchar(50) NOT NULL,
   `Nama_Pegawai` varchar(50) NOT NULL,
   `Alamat` varchar(50) NOT NULL,
@@ -106,10 +121,9 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`Nip`, `Password`, `Nama_Pegawai`, `Alamat`, `Telp_Pegawai`, `Email_Pegawai`, `Jabatan`, `Gelar`) VALUES
-(813112234, 'bebas', 'Dosen', 'jalan sana', 81311633, 'dosen@unair.com', 'dosen', 'sarjana'),
-(813112333, 'bebas', 'Kadep', 'jalan sana', 81311633, 'kadep@unair.com', 'dosen', 'sarjana'),
-(813112335, 'bebas', 'Ilham', 'jalan sana', 81311633, 'kadep@unair.com', 'dosen', 'sarjana'),
-(813112336, 'bebas', 'TU', 'jalan sana', 81311633, 'kadep@unair.com', 'dosen', 'sarjana');
+('2147483647', 'test', 'tester', 'hesewewewe', 2222222, 'tests', 'Dosen', 'Drs'),
+('test', 'test', 'test', 'test', 11, 'test', 'Kadep', 'test'),
+('123123', 'bebas', 'damar', 'aa', 1235, 'asdgafa', 'TU', 'sarjana');
 
 -- --------------------------------------------------------
 
@@ -117,31 +131,49 @@ INSERT INTO `pegawai` (`Nip`, `Password`, `Nama_Pegawai`, `Alamat`, `Telp_Pegawa
 -- Table structure for table `pesan`
 --
 
-CREATE TABLE `pesan` (
-  `No_Pesan` int(15) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pesan` (
+`No_Pesan` int(15) NOT NULL,
   `Judul_Pesan` varchar(50) NOT NULL,
   `Tanggal` date NOT NULL,
   `Waktu` time NOT NULL,
   `Keterangan` varchar(1000) NOT NULL,
-  `File` varchar(50) NOT NULL,
+  `File` varchar(1000) NOT NULL,
   `Pengirim` varchar(30) NOT NULL,
   `Penerima` varchar(30) NOT NULL,
   `Tanggal_kirim` date NOT NULL,
   `Status_pengirim` int(1) NOT NULL,
   `Status_penerima` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pesan`
 --
 
 INSERT INTO `pesan` (`No_Pesan`, `Judul_Pesan`, `Tanggal`, `Waktu`, `Keterangan`, `File`, `Pengirim`, `Penerima`, `Tanggal_kirim`, `Status_pengirim`, `Status_penerima`) VALUES
-(1, 'Test', '2016-05-21', '12:00:00', 'ini surat coba coba', 'tidak ada', 'Dosen', 'Kadep', '2016-05-21', 1, 1),
-(7, 'Test', '2016-05-21', '12:00:00', 'coba ini yaaa', 'tidak ada', 'Kadep', 'Dosen', '2016-05-31', 1, 1),
-(8, 'Test', '2016-05-21', '12:00:00', 'buat ilham', 'tidak ada', 'Kadep', 'Ilham', '2016-05-31', 1, 1),
-(9, 'Test', '2016-05-21', '12:00:00', 'buat dosen dari ilham', 'tidak ada', 'Ilham', 'Dosen', '2016-05-31', 1, 1),
-(10, 'Test', '2016-05-21', '12:00:00', 'coba ini yaa', 'tidak ada', 'Dosen', 'TU', '2016-05-31', 1, 0),
-(11, 'Test', '2016-05-21', '12:00:00', 'buat ilham dari Dosen', 'tidak ada', 'Dosen', 'Ilham', '2016-05-31', 1, 0);
+(1, 'Test', '2016-05-21', '12:00:00', 'ini surat coba coba', '', 'Dosen', 'Kadep', '2016-05-21', 1, 1),
+(2, 'Test', '2016-05-21', '12:00:00', 'Ini Surat ke DUA', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
+(3, 'Test', '2016-05-21', '12:00:00', 'ini surat ke tiga', '', 'Dosen', 'Kadep', '2016-05-21', 1, 1),
+(53, 'Test', '2016-05-21', '12:00:00', 'ini yang ke empat', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
+(54, 'Test2', '2016-05-21', '12:00:00', 'ini email Test 2', '', 'TU', 'Dosen', '2016-05-22', 0, 1),
+(55, 'Test', '2016-05-21', '12:00:00', 'ini yang ke empat', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
+(57, 'Test', '2016-05-21', '12:00:00', 'ini yang ke lima', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
+(58, 'Test', '2016-05-21', '12:00:00', 'ini yang ke enam untuk dosen', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
+(59, 'Test', '2016-05-21', '12:00:00', 'ini yang ke tujuh untuk kadep', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
+(60, 'Test', '2016-05-21', '12:00:00', 'ini yang ke delapan untuk kadep, yang ke tujuh seharusnya untuk dosen', '', 'Dosen', 'Kadep', '2016-05-21', 1, 1),
+(61, 'Test2', '2016-05-21', '12:00:00', 'coba ini dah', '', 'TU', 'Dosen', '2016-05-22', 0, 1),
+(62, 'Test', '2016-05-21', '12:00:00', 'ini yang ke sembilan\r\nkalau yang ini?harus bisa\r\noke', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
+(63, 'Test', '2016-05-21', '12:00:00', 'ini yang ke 10, sip semua benar', '', 'Kadep', 'Dosen', '2016-05-21', 1, 1),
+(64, 'Test 3', '2016-05-21', '12:00:00', 'ini Surat TEST 3', '', 'Kadep', 'Dosen', '2016-05-23', 1, 1),
+(65, 'Test', '2016-05-21', '12:00:00', 'heah', '', 'Kadep', 'Dosen', '2016-05-22', 1, 1),
+(66, 'Test', '2016-05-21', '12:00:00', 'satu lagi', '', 'Kadep', 'Dosen', '2016-05-22', 1, 1),
+(67, 'Test', '2016-05-21', '12:00:00', 'terakhir deh', '', 'Kadep', 'Dosen', '2016-05-22', 1, 1),
+(68, 'Test', '2016-05-21', '12:00:00', 'coba ini salah', '', 'Dosen', 'Kadep', '2016-05-23', 1, 0),
+(69, 'Test', '2016-05-21', '12:00:00', 'coba ini salah', '', 'Dosen', 'Kadep', '2016-05-23', 1, 0),
+(70, 'Test', '2016-05-21', '12:00:00', 'coba ini salah', '', 'Dosen', 'Kadep', '2016-05-23', 1, 0),
+(71, 'Test', '2016-05-21', '12:00:00', 'coba ini salah', '', 'Dosen', 'Kadep', '2016-05-23', 0, 0),
+(72, 'dimas', '2016-06-03', '02:02:00', 'aaa', 'KHS-081311633062.pdf', 'test', 'tester', '2016-06-02', 1, 1),
+(73, 'hahahaha', '0000-00-00', '00:00:00', '111<br>0001-11-02<br>hahahaha<br>-Tidak Diteruskan-<br>Penting<br>dimas<br>Mohon Pendapat<br>21231<br>', 'null', 'test', 'damar', '2016-06-02', 0, 1),
+(74, '1', '0000-00-00', '00:00:00', '909<br>0001-01-01<br>1<br>-Tidak Diteruskan-<br>Penting<br>bbb<br>Mohon Pendapat<br>1<br>', 'tidak ada', 'test', 'damar', '2016-06-02', 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -151,19 +183,19 @@ INSERT INTO `pesan` (`No_Pesan`, `Judul_Pesan`, `Tanggal`, `Waktu`, `Keterangan`
 -- Indexes for table `event`
 --
 ALTER TABLE `event`
-  ADD PRIMARY KEY (`id_agenda`);
+ ADD PRIMARY KEY (`id_agenda`);
 
 --
--- Indexes for table `pegawai`
+-- Indexes for table `lembar_disposisi`
 --
-ALTER TABLE `pegawai`
-  ADD PRIMARY KEY (`Nip`);
+ALTER TABLE `lembar_disposisi`
+ ADD PRIMARY KEY (`Kode`);
 
 --
 -- Indexes for table `pesan`
 --
 ALTER TABLE `pesan`
-  ADD PRIMARY KEY (`No_Pesan`);
+ ADD PRIMARY KEY (`No_Pesan`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -173,12 +205,12 @@ ALTER TABLE `pesan`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id_agenda` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+MODIFY `id_agenda` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
-  MODIFY `No_Pesan` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+MODIFY `No_Pesan` int(15) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=75;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
