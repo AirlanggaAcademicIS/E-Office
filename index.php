@@ -218,7 +218,11 @@
         <?php  echo $data['Lokasi'] ?>
       </td>
       <td>
-        <?php  echo $data['Tanggal'] ?>
+        <?php  
+            $tgl=$data["Tanggal"];
+            
+            echo $tglku= date("d/m/Y", strtotime($tgl));  
+        ?>
       </td>
         <td>
         <?php  echo $data['Pukul'] ?>
