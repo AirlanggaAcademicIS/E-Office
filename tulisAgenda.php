@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>E.Office | </title>
-    <?php   include("koneksi.php"); ?>
+    <?php  include("koneksi.php"); ?>
 
 
 	<!-- Bootstrap core CSS -->
@@ -38,7 +38,7 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-    <?php  
+    <?php 
     $Pengguna=$_GET['pengguna'];
     $query="Select COUNT(Judul_Pesan) from pesan where Status_penerima = '0'AND Penerima = '".$Pengguna."'";
     $hasil=mysql_query ($query);
@@ -48,23 +48,10 @@
         while ($data = mysql_fetch_array ($hasil)){
         $jumlahKotakMasuk=$data[0];}}
     ?>
- <?php 
-    $Pengguna=$_GET['pengguna'];
-    $query="Select Jabatan from pegawai where Nama_Pegawai = '".$Pengguna."'";
-    $hasil=mysql_query ($query);
-        if($hasil==false){
-        echo "DB SEDANG EROR";
-        }else {
-         while ($data = mysql_fetch_array ($hasil)){
-        $Jabatan=$data[0];}   
-        }
-		
-    ?>
 
-    
-   
 
 </head>
+
 
 <body class="nav-md">
 
@@ -74,7 +61,7 @@
 				<div class="left_col scroll-view">
 
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="home.php" class="site_title"><i class="fa fa-paw"></i> <span>Woffice!</span></a>
+						<a href="index.php" class="site_title"><i class="fa fa-paw"></i> <span>Woffice!</span></a>
 					</div>
 					<div class="clearfix"></div>
 
@@ -98,16 +85,15 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="home.php?pengguna=<?php  echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
+								<li><a href="index.php?pengguna=<?php  echo $Pengguna ?>"><i class="fa fa-home"></i> Home </a>
 									</li>
 								<li><a><i class="fa fa-edit"></i> E-Letter <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
 										<li><a href="permintaanSurat.php?pengguna=<?php  echo $Pengguna ?>">Permintaan Surat</a>
 										</li>
-										<?php 
-        if ($Jabatan=="Kadep"){ ?>
-                                        <li><a href="memo.php?pengguna=<?php  echo $Pengguna ?>">Memo</a></li>
-                                        <?php } ?>
+                                        
+										<li><a href="memo.php?pengguna=<?php  echo $Pengguna ?>">Buat Memo</a>
+										</li>
                                         <li><a href="kotakMasuk.php?pengguna=<?php  echo $Pengguna ?>">Kotak Masuk <span class="badge"><?php  echo $jumlahKotakMasuk ?></span></a>
 										</li>
                                         <li><a href="kotakKeluar.php?pengguna=<?php  echo $Pengguna ?>">Kotak Keluar</a>
@@ -127,7 +113,6 @@
 						</div>
 					</div>
 					<!-- /sidebar menu -->
-
 
 					<!-- /menu footer buttons -->
 					<div class="sidebar-footer hidden-small">
@@ -220,19 +205,7 @@
                       </div>
                     </div> <!-- Nama Even -->
                       
-                    <div class="form-group has-feedback">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kategori" >Kategori 
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="kategori" required class="form-control col-md-7 col-xs-12 " data-parsley-id="1360" data-error="Kategori even harus diisi" name="Kategori"><ul class="parsley-errors-list filled" id="parsley-id-1360" name="Kategori"></ul>
-                      
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                        
-
-                          
-                        <div class="help-block with-errors"></div>
-                          </div>
-                    </div> <!-- Kategori Even -->  
+                    
                       
                      <div class="form-group has-feedback">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempat" >Tempat 
@@ -284,20 +257,20 @@
 
                   </form>
 
-<?php  
+<?php 
 if (isset($_POST['submit'])){
 include ('koneksi.php'); 
-    echo 'db sampe sini';
+    
 //$ = int (java)
 $Nama=$_POST['Nama']; 
-$Kategori=$_POST['Kategori']; 
+
 $Lokasi=$_POST['Lokasi']; 
 $Tanggal=$_POST['Tanggal'];
 $Pukul=$_POST['Pukul'];
 $Keterangan=$_POST['Keterangan'];
     
-$input    ="INSERT INTO event (Nama, Kategori, Lokasi, Tanggal, Pukul, Keterangan)
-            VALUES ('$Nama','$Kategori','$Lokasi','$Tanggal','$Pukul','$Keterangan')";
+$input    ="INSERT INTO event (Nama, Lokasi, Tanggal, Pukul, Keterangan)
+            VALUES ('$Nama','$Lokasi','$Tanggal','$Pukul','$Keterangan')";
     mysql_query($input);}
 ?>
                     
