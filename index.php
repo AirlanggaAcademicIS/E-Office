@@ -189,8 +189,42 @@
                     <div class="row x_title"> <h1>Berita</h1> </div>
                         
                         <div class="table fixed-panel">
-                            Ubah konten disini !
+                            
+                            <a href="http://www.unair.ac.id">Universitas Airlangga Official		</a>
+                            
                         </div>
+                        <div class="table fixed-panel">
+                            
+                            <a href="http://dispendik.surabaya.go.id">Dinas Pendidikan Surabaya		</a>
+                            
+                            
+                        </div>
+                        <div class="table fixed-panel">
+                            
+                            <a href="http://tekno.kompas.com">Kompas		</a>
+                            
+                        </div>
+                        <div class="table fixed-panel">
+                            
+                            <a href="http://inet.detik.com/index.php?lang=en">Detik		</a>
+                            
+                        </div>
+                        <div class="table fixed-panel">
+                            
+                            <a href="http://tekno.liputan6.com/index.php?lang=en">Liputan 6		</a>
+                            
+                        </div>
+                        <div class="table fixed-panel">
+                            
+                            <a href="http://techno.okezone.com/index.php?lang=en">Okezone		</a>
+                            
+                        </div>
+                        <div class="table fixed-panel">
+                            
+                            <a href="http://tekno.tempo.co/">Tempo		</a>
+                            
+                        </div>
+                       
                         
                     </div>
                     
